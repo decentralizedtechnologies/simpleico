@@ -1,20 +1,9 @@
-import {
-  Box,
-  Button,
-  Checkbox,
-  Container,
-  FormControlLabel,
-  Grid,
-  Paper,
-  TextField,
-  Theme,
-  Typography,
-  withStyles,
-} from "@material-ui/core";
+import { Box, Button, Checkbox, Container, FormControlLabel, Grid, Paper, TextField, Theme, Typography, withStyles } from "@material-ui/core";
 import { History } from "history";
 import React from "react";
 import { RouteComponentProps } from "react-router";
 import { StepsSidebar, ToolbarPadding } from "../../../components";
+import routes from "../../../routes";
 import ls from "../../../utils/ls";
 
 interface IParams extends RouteComponentProps<{ id: string }> {
@@ -50,7 +39,9 @@ export const Params = withStyles((theme: Theme) => ({}))(
       ls.update("bnb", { token: { isMintable: checked } });
     };
 
-    const onNext = () => {};
+    const onNext = () => {
+      history.push(routes.bnb.token.new.connect);
+    };
 
     return (
       <Box display="flex">
@@ -76,10 +67,7 @@ export const Params = withStyles((theme: Theme) => ({}))(
           <Box mb={4}>
             <Paper elevation={1}>
               <Box p={2}>
-                <Typography gutterBottom>Step 1</Typography>
-                <Typography gutterBottom variant="body2">
-                  Name, supply and symbol.
-                </Typography>
+                <Typography gutterBottom>Step 1 · Set a name, supply and symbol.</Typography>
                 <Box mt={4}>
                   <Grid container spacing={2}>
                     <Grid item lg={6}>
@@ -204,16 +192,9 @@ export const Params = withStyles((theme: Theme) => ({}))(
                 <Box mt={4}>
                   <Grid container spacing={2} justify="flex-end">
                     <Grid item>
-                      <Box
-                        display="flex"
-                        flexDirection="column"
-                        justifyContent="flex-end"
-                        height="100%"
-                      >
                         <Button variant="contained" color="primary" onClick={onNext}>
                           Next
                         </Button>
-                      </Box>
                     </Grid>
                   </Grid>
                 </Box>
