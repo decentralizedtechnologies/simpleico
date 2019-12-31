@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Checkbox,
   Container,
   FormControlLabel,
@@ -9,12 +10,12 @@ import {
   Theme,
   Typography,
   withStyles,
-  Button,
 } from "@material-ui/core";
 import { History } from "history";
 import React from "react";
 import { RouteComponentProps } from "react-router";
 import { StepsSidebar, ToolbarPadding } from "../../../components";
+import ls from "../../../utils/ls";
 
 interface IParams extends RouteComponentProps<{ id: string }> {
   classes: any;
@@ -23,6 +24,34 @@ interface IParams extends RouteComponentProps<{ id: string }> {
 
 export const Params = withStyles((theme: Theme) => ({}))(
   ({ classes, match, history, ...props }: IParams) => {
+    const [name, setName] = React.useState(ls.get("bnb", "token.name"));
+    const [symbol, setSymbol] = React.useState(ls.get("bnb", "token.symbol"));
+    const [supply, setSupply] = React.useState(ls.get("bnb", "token.supply"));
+    const [isMintable, setIsMintable] = React.useState(ls.get("bnb", "token.isMintable", false));
+
+    const onSetName = (e: React.ChangeEvent<HTMLInputElement>): void => {
+      setName(e.target.value);
+      ls.update("bnb", { token: { name: e.target.value } });
+    };
+
+    const onSetSymbol = (e: React.ChangeEvent<HTMLInputElement>): void => {
+      setSymbol(e.target.value);
+      ls.update("bnb", { token: { symbol: e.target.value } });
+    };
+
+    const onSetSupply = (e: React.ChangeEvent<HTMLInputElement>): void => {
+      const supply = Number(e.target.value);
+      setSupply(e.target.value);
+      ls.update("bnb", { token: { supply: e.target.value } });
+    };
+
+    const onSetMintable = (e: React.ChangeEvent<HTMLInputElement>, checked: boolean): void => {
+      setIsMintable(checked);
+      ls.update("bnb", { token: { isMintable: checked } });
+    };
+
+    const onNext = () => {};
+
     return (
       <Box display="flex">
         <StepsSidebar>
@@ -75,6 +104,8 @@ export const Params = withStyles((theme: Theme) => ({}))(
                           label="Name"
                           placeholder="eg. Binance DEX Token"
                           autoFocus
+                          onChange={onSetName}
+                          value={name}
                         />
                       </Box>
                     </Grid>
@@ -97,7 +128,13 @@ export const Params = withStyles((theme: Theme) => ({}))(
                         justifyContent="flex-end"
                         height="100%"
                       >
-                        <TextField fullWidth label="Symbol" placeholder="eg. BNB" />
+                        <TextField
+                          fullWidth
+                          label="Symbol"
+                          placeholder="eg. BNB"
+                          onChange={onSetSymbol}
+                          value={symbol}
+                        />
                       </Box>
                     </Grid>
                   </Grid>
@@ -121,7 +158,13 @@ export const Params = withStyles((theme: Theme) => ({}))(
                         justifyContent="flex-end"
                         height="100%"
                       >
-                        <TextField fullWidth label="Supply" placeholder="eg. 1000" />
+                        <TextField
+                          fullWidth
+                          label="Supply"
+                          placeholder="eg. 1000"
+                          onChange={onSetSupply}
+                          value={supply}
+                        />
                       </Box>
                     </Grid>
                   </Grid>
@@ -144,7 +187,14 @@ export const Params = withStyles((theme: Theme) => ({}))(
                         height="100%"
                       >
                         <FormControlLabel
-                          control={<Checkbox checked={false} value="checkedB" color="primary" />}
+                          control={
+                            <Checkbox
+                              checked={isMintable}
+                              value="checkedB"
+                              color="primary"
+                              onChange={onSetMintable}
+                            />
+                          }
                           label="Mintable"
                         />
                       </Box>
@@ -160,7 +210,9 @@ export const Params = withStyles((theme: Theme) => ({}))(
                         justifyContent="flex-end"
                         height="100%"
                       >
-                        <Button variant="contained" color="primary">Next</Button>
+                        <Button variant="contained" color="primary" onClick={onNext}>
+                          Next
+                        </Button>
                       </Box>
                     </Grid>
                   </Grid>
