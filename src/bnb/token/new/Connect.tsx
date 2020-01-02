@@ -1,19 +1,9 @@
-import {
-  Box,
-  Button,
-  Container,
-  Grid,
-  Paper,
-  Tab,
-  Tabs,
-  Theme,
-  Typography,
-  withStyles,
-} from "@material-ui/core";
+import { crypto } from "@binance-chain/javascript-sdk";
+import { Box, Button, Container, Grid, Paper, Tab, Tabs, TextField, Theme, Typography, withStyles } from "@material-ui/core";
 import { History } from "history";
 import React from "react";
 import { RouteComponentProps } from "react-router";
-import { StepsSidebar, ToolbarPadding } from "../../../components";
+import { Dropzone, StepsSidebar, ToolbarPadding } from "../../../components";
 import routes from "../../../routes";
 import ls from "../../../utils/ls";
 
@@ -25,6 +15,7 @@ interface IConnect extends RouteComponentProps<{ id: string }> {
 export const Connect = withStyles((theme: Theme) => ({
   tabs: {
     borderRight: `1px solid ${theme.palette.primary.light}`,
+    width: "20%",
   },
 }))(({ classes, match, history, ...props }: IConnect) => {
   const [value, setValue] = React.useState(0);
@@ -106,38 +97,33 @@ export const Connect = withStyles((theme: Theme) => ({
                   aria-label="Vertical tabs example"
                   className={classes.tabs}
                 >
-                  <Tab label="Mobile Wallet" />
-                  <Tab label="Ledger Device" />
-                  <Tab label="Trezor Device" />
                   <Tab label="Keystore File" />
                   <Tab label="Recovery Phrase" />
+                  <Tab label="Ledger Device" />
+                  <Tab label="Mobile Wallet" />
+                  <Tab label="Trezor Device" />
                 </Tabs>
                 <TabPanel index={0} value={value}>
-                  Mobile Wallet
+                  <KeystoreFile />
                 </TabPanel>
                 <TabPanel index={1} value={value}>
-                  Ledger Device
+                  Recovery Phrase
                 </TabPanel>
                 <TabPanel index={2} value={value}>
-                  Trezor Device
+                  Ledger Device
                 </TabPanel>
                 <TabPanel index={3} value={value}>
-                  Keystore File
+                  Mobile Wallet
                 </TabPanel>
                 <TabPanel index={4} value={value}>
-                  Recovery Phrase
+                  Trezor Device
                 </TabPanel>
               </Box>
               <Box mt={4}>
-                <Grid container spacing={2} justify="flex-end">
+                <Grid container spacing={2} justify="space-between">
                   <Grid item>
                     <Button variant="contained" onClick={onBack}>
                       Back
-                    </Button>
-                  </Grid>
-                  <Grid item>
-                    <Button variant="contained" color="primary" onClick={onNext}>
-                      Next
                     </Button>
                   </Grid>
                 </Grid>
@@ -150,7 +136,11 @@ export const Connect = withStyles((theme: Theme) => ({
   );
 });
 
-const TabPanel = withStyles((theme: Theme) => ({}))(
+const TabPanel = withStyles((theme: Theme) => ({
+  tabPanel: {
+    width: "80%",
+  },
+}))(
   ({
     classes,
     value,
@@ -164,9 +154,71 @@ const TabPanel = withStyles((theme: Theme) => ({}))(
     children: any;
   }) => {
     return (
-      <Box hidden={value !== index} role="tabpanel" p={2}>
+      <Box hidden={value !== index} role="tabpanel" p={2} className={classes.tabPanel}>
         {children}
       </Box>
+    );
+  },
+);
+
+const KeystoreFile = withStyles((theme: Theme) => ({}))(
+  ({ classes, ...props }: { classes: any }) => {
+    const [keystoreFile, setKeystoreFile] = React.useState<string | null>(null);
+    const [password, setPassword] = React.useState<string | null>(null);
+    const passwordRef = React.useRef<HTMLInputElement>(null);
+
+    const onUnlock = () => {
+      try {
+        const pwd = (passwordRef.current as HTMLInputElement).value;
+        const privateKey = crypto.getPrivateKeyFromKeyStore(keystoreFile, pwd);
+        console.log(privateKey);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    const onAddFile = (file: any) => {
+      const reader = new FileReader();
+      reader.onloadend = async () => {
+        try {
+          setKeystoreFile(reader.result as string);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+      reader.readAsText(file);
+    };
+
+    return (
+      <>
+        <Typography>Connect an encrypted wallet file and input your password</Typography>
+        <Box py={2}>
+          <Dropzone onAddFile={onAddFile} />
+        </Box>
+        <TextField
+          label="Enter your wallet password"
+          fullWidth
+          inputRef={passwordRef}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
+            setPassword(e.target.value);
+          }}
+          type="password"
+        />
+        <Box mt={4}>
+          <Grid container spacing={2} justify="flex-end">
+            <Grid item>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={onUnlock}
+                disabled={!Boolean(password) || !Boolean(keystoreFile)}
+              >
+                Unlock Wallet
+              </Button>
+            </Grid>
+          </Grid>
+        </Box>
+      </>
     );
   },
 );

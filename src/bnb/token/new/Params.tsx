@@ -1,4 +1,16 @@
-import { Box, Button, Checkbox, Container, FormControlLabel, Grid, Paper, TextField, Theme, Typography, withStyles } from "@material-ui/core";
+import {
+  Box,
+  Button,
+  Checkbox,
+  Container,
+  FormControlLabel,
+  Grid,
+  Paper,
+  TextField,
+  Theme,
+  Typography,
+  withStyles,
+} from "@material-ui/core";
 import { History } from "history";
 import React from "react";
 import { RouteComponentProps } from "react-router";
@@ -104,8 +116,12 @@ export const Params = withStyles((theme: Theme) => ({}))(
                     <Grid item lg={6}>
                       <Box>
                         <Typography variant="body2">
-                          The symbol commonly consists (but is not limited to) of 3 uppercase
-                          characters, eg. BNB, BTC, ETH.
+                          The symbol commonly consists of 3 uppercase characters and is limited to 8
+                          characters. In the case of the Binance Chain, your chosen symbol will be
+                          appended 3 unique characters, eg. TOKEN-D23.{" "}
+                          <a href="https://docs.binance.org/tokens.html#issue" target="_blank">
+                            Learn more.
+                          </a>
                         </Typography>
                       </Box>
                     </Grid>
@@ -135,7 +151,8 @@ export const Params = withStyles((theme: Theme) => ({}))(
                           The initial supply of your token. This is up to you, but it commonly
                           represents the amount of shares your company is selling, or a fraction of
                           it. It can also represent only 1 object, like a car, and its price would
-                          be the actual value of the vehicle.
+                          be the actual value of the vehicle. The supply is limited to 1e8 for
+                          decimal part. The max total supply is 90 billion.
                         </Typography>
                       </Box>
                     </Grid>
@@ -192,9 +209,9 @@ export const Params = withStyles((theme: Theme) => ({}))(
                 <Box mt={4}>
                   <Grid container spacing={2} justify="flex-end">
                     <Grid item>
-                        <Button variant="contained" color="primary" onClick={onNext}>
-                          Next
-                        </Button>
+                      <Button variant="contained" color="primary" onClick={onNext}>
+                        Next
+                      </Button>
                     </Grid>
                   </Grid>
                 </Box>

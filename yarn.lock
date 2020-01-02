@@ -1337,6 +1337,13 @@
   dependencies:
     "@babel/types" "^7.3.0"
 
+"@types/dropzone@^5.5.1":
+  version "5.5.1"
+  resolved "https://registry.yarnpkg.com/@types/dropzone/-/dropzone-5.5.1.tgz#23283e7e4170eabe5c3fb8f687ca9d0cb5d5613e"
+  integrity sha512-xiiQP/cF3t2c81GabHYatS7dZz0LK933Ovw1kH0+UC/35JMWwVQ/qv3z3RAFqgh+TkW9j2fc94Y+kJx+S8KCoA==
+  dependencies:
+    "@types/jquery" "*"
+
 "@types/eslint-visitor-keys@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@types/eslint-visitor-keys/-/eslint-visitor-keys-1.0.0.tgz#1ee30d79544ca84d68d4b3cdb0af4f205663dd2d"
@@ -1378,6 +1385,13 @@
   integrity sha512-1cy3xkOAfSYn78dsBWy4M3h/QF/HeWPchNFDjysVtp3GHeTdSmtluNnELfCmfNRRHo0OWEcpf+NsEJQvwQfdqQ==
   dependencies:
     "@types/jest-diff" "*"
+
+"@types/jquery@*":
+  version "3.3.31"
+  resolved "https://registry.yarnpkg.com/@types/jquery/-/jquery-3.3.31.tgz#27c706e4bf488474e1cb54a71d8303f37c93451b"
+  integrity sha512-Lz4BAJihoFw5nRzKvg4nawXPzutkv7wmfQ5121avptaSIXlDNJCUuxZxX/G+9EVidZGuO0UBlk+YjKbwRKJigg==
+  dependencies:
+    "@types/sizzle" "*"
 
 "@types/json-schema@^7.0.3":
   version "7.0.3"
@@ -1452,6 +1466,11 @@
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
+
+"@types/sizzle@*":
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/@types/sizzle/-/sizzle-2.3.2.tgz#a811b8c18e2babab7d542b3365887ae2e4d9de47"
+  integrity sha512-7EJYyKTL7tFR8+gDbB6Wwz/arpGa0Mywk1TJbNzKzHtzbwVmY4HR9WqS5VV7dsBUKQmPNr192jHr/VpBluj/hg==
 
 "@types/stack-utils@^1.0.1":
   version "1.0.1"
@@ -3640,6 +3659,11 @@ dotenv@6.2.0:
   version "6.2.0"
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-6.2.0.tgz#941c0410535d942c8becf28d3f357dbd9d476064"
   integrity sha512-HygQCKUBSFl8wKQZBSemMywRWcEDNidvNbjGVyZu3nbZ8qq9ubiPoGLMdRDpfSrpkkm9BXYFkpKxxFX38o/76w==
+
+dropzone@^5.5.1:
+  version "5.5.1"
+  resolved "https://registry.yarnpkg.com/dropzone/-/dropzone-5.5.1.tgz#06e2f513e61d6aa363d4b556f18574f47cf7ba26"
+  integrity sha512-3VduRWLxx9hbVr42QieQN25mx/I61/mRdUSuxAmDGdDqZIN8qtP7tcKMa3KfpJjuGjOJGYYUzzeq6eGDnkzesA==
 
 duplexer@^0.1.1:
   version "0.1.1"
