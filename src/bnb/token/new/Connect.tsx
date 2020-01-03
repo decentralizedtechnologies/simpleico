@@ -1,5 +1,17 @@
 import { crypto } from "@binance-chain/javascript-sdk";
-import { Box, Button, Container, Grid, Paper, Tab, Tabs, TextField, Theme, Typography, withStyles } from "@material-ui/core";
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  Paper,
+  Tab,
+  Tabs,
+  TextField,
+  Theme,
+  Typography,
+  withStyles,
+} from "@material-ui/core";
 import { History } from "history";
 import React from "react";
 import { RouteComponentProps } from "react-router";
@@ -22,6 +34,11 @@ export const Connect = withStyles((theme: Theme) => ({
 
   const handleChange = (event: React.ChangeEvent<{}>, value: any): void => {
     setValue(value);
+  };
+
+  const onNextWithKeystoreFile = (privateKey: string) => {
+    sessionStorage.setItem("bnb", JSON.stringify({ keystoreFile: { privateKey } }));
+    history.push(routes.bnb.token.new.create);
   };
 
   const onNext = () => {};
@@ -104,7 +121,11 @@ export const Connect = withStyles((theme: Theme) => ({
                   <Tab label="Trezor Device" />
                 </Tabs>
                 <TabPanel index={0} value={value}>
-                  <KeystoreFile />
+                  <KeystoreFile
+                    onNext={(privateKey: string) => {
+                      onNextWithKeystoreFile(privateKey);
+                    }}
+                  />
                 </TabPanel>
                 <TabPanel index={1} value={value}>
                   Recovery Phrase
@@ -162,7 +183,7 @@ const TabPanel = withStyles((theme: Theme) => ({
 );
 
 const KeystoreFile = withStyles((theme: Theme) => ({}))(
-  ({ classes, ...props }: { classes: any }) => {
+  ({ classes, onNext, ...props }: { classes: any; onNext: (privateKey: string) => void }) => {
     const [keystoreFile, setKeystoreFile] = React.useState<string | null>(null);
     const [password, setPassword] = React.useState<string | null>(null);
     const passwordRef = React.useRef<HTMLInputElement>(null);
@@ -172,6 +193,7 @@ const KeystoreFile = withStyles((theme: Theme) => ({}))(
         const pwd = (passwordRef.current as HTMLInputElement).value;
         const privateKey = crypto.getPrivateKeyFromKeyStore(keystoreFile, pwd);
         console.log(privateKey);
+        onNext(privateKey);
       } catch (error) {
         console.error(error);
       }
