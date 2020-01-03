@@ -1,17 +1,5 @@
 import { crypto } from "@binance-chain/javascript-sdk";
-import {
-  Box,
-  Button,
-  Container,
-  Grid,
-  Paper,
-  Tab,
-  Tabs,
-  TextField,
-  Theme,
-  Typography,
-  withStyles,
-} from "@material-ui/core";
+import { Box, Button, Container, Grid, Paper, Tab, Tabs, TextField, Theme, Typography, withStyles } from "@material-ui/core";
 import { History } from "history";
 import React from "react";
 import { RouteComponentProps } from "react-router";
@@ -192,10 +180,15 @@ const KeystoreFile = withStyles((theme: Theme) => ({}))(
       try {
         const pwd = (passwordRef.current as HTMLInputElement).value;
         const privateKey = crypto.getPrivateKeyFromKeyStore(keystoreFile, pwd);
-        console.log(privateKey);
         onNext(privateKey);
       } catch (error) {
         console.error(error);
+      }
+    };
+
+    const onUnlockWithEnter = (e: React.KeyboardEvent<HTMLInputElement>): void => {
+      if (e.key === "Enter" && Boolean(password) && Boolean(keystoreFile)) {
+        onUnlock();
       }
     };
 
@@ -224,6 +217,7 @@ const KeystoreFile = withStyles((theme: Theme) => ({}))(
           onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
             setPassword(e.target.value);
           }}
+          onKeyPress={onUnlockWithEnter}
           type="password"
         />
         <Box mt={4}>

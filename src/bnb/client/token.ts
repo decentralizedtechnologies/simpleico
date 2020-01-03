@@ -1,15 +1,17 @@
-import TokenManagement from "@binance-chain/javascript-sdk";
-import { getClient } from "./client";
-
-const issue = (network: string) => {
-  return (
+const issue = (client: any) => {
+  return async (
     senderAddress: string,
     tokenName: string,
     symbol: string,
     totalSupply: number,
     mintable: boolean,
   ) => {
-    const token = new TokenManagement(getClient(network));
+    try {
+      const res = await client.tokens.issue(senderAddress, tokenName, symbol, totalSupply, mintable);
+      console.log(res);
+    } catch (error) {
+      throw error;
+    }
   };
 };
 

@@ -1,4 +1,6 @@
-import { Box, Button, Container, FormControlLabel, Grid, Paper, Switch, Theme, Typography, withStyles } from "@material-ui/core";
+import { crypto } from "@binance-chain/javascript-sdk";
+import { Backdrop, Box, Button, Container, FormControlLabel, Grid, Paper, Switch, Theme, Typography, withStyles } from "@material-ui/core";
+import CircularProgress from '@material-ui/core/CircularProgress';
 import CancelOutlinedIcon from "@material-ui/icons/CancelOutlined";
 import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
 import { History } from "history";
@@ -7,9 +9,11 @@ import { RouteComponentProps } from "react-router";
 import { Link } from "react-router-dom";
 import { StepsSidebar, ToolbarPadding } from "../../../components";
 import routes from "../../../routes";
+import { styles } from "../../../theme";
 import ls from "../../../utils/ls";
 import ss from "../../../utils/ss";
 import { getClient, networks } from "../../client";
+import token from "../../client/token";
 
 interface ICreate extends RouteComponentProps<{ id: string }> {
   classes: any;
@@ -17,16 +21,19 @@ interface ICreate extends RouteComponentProps<{ id: string }> {
 }
 
 export const Create = withStyles((theme: Theme) => ({
+  ...styles(theme),
   walletConnected: {
     "& svg": {
       fontSize: "1rem",
     },
   },
 }))(({ classes, match, history, ...props }: ICreate) => {
-  const [network, setNetwork] = React.useState(networks.mainnet);
-  const [address, setAddress] = React.useState(null);
+  const [network, setNetwork] = React.useState(networks.testnet);
+  const [address, setAddress] = React.useState("");
   const [isGettingAccount, setIsGettingAccount] = React.useState(false);
+  const [isIssuingToken, setIsIssuingToken] = React.useState(false);
   const [balance, setBalance] = React.useState("0.00");
+  const [client, setClient] = React.useState(getClient(network));
 
   React.useEffect(() => {
     getAddress();
@@ -36,7 +43,20 @@ export const Create = withStyles((theme: Theme) => ({
     setNetwork(network === networks.mainnet ? networks.testnet : networks.mainnet);
   };
 
-  const onCreate = () => {};
+  const onCreate = async () => {
+    try {
+      setIsIssuingToken(true);
+      const senderAddress = address;
+      const tokenName = ls.get("bnb", "token.name");
+      const symbol = ls.get("bnb", "token.symbol");
+      const totalSupply = Number(ls.get("bnb", "token.supply"));
+      const mintable = ls.get("bnb", "token.isMintable");
+      await token.issue(client)(senderAddress, tokenName, symbol, totalSupply, mintable);
+    } catch (error) {
+      setIsIssuingToken(false);
+      console.error(error);
+    }
+  };
 
   const onBack = () => {
     history.push(routes.bnb.token.new.connect);
@@ -45,9 +65,8 @@ export const Create = withStyles((theme: Theme) => ({
   const getAddress = async (): Promise<void> => {
     try {
       setIsGettingAccount(true);
-      setAddress(null);
+      setAddress("");
       const privateKey = ss.get("bnb", "keystoreFile.privateKey", null);
-      const client = getClient(network);
       client.chooseNetwork(network);
       await client.setPrivateKey(privateKey);
       await client.initChain();
@@ -60,13 +79,19 @@ export const Create = withStyles((theme: Theme) => ({
       setIsGettingAccount(false);
     } catch (error) {
       console.error(error);
-      setAddress(null);
+      setAddress("");
       setIsGettingAccount(false);
     }
   };
 
   return (
     <Box display="flex">
+      <Backdrop
+        className={classes.backdrop}
+        open={isIssuingToken}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <StepsSidebar>
         <h1></h1>
       </StepsSidebar>
@@ -123,7 +148,7 @@ export const Create = withStyles((theme: Theme) => ({
               <Typography gutterBottom>Step 3 · Create your token.</Typography>
               <Typography variant="body2">
                 In this step you will sign a transaction in the Binance {network}. Confirm your
-                information, choose a network and then click "Create".
+                information and then click "Create".
               </Typography>
               <Box mt={4}>
                 <Box mb={2}>
