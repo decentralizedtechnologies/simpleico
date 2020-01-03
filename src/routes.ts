@@ -8,6 +8,7 @@ export const routes = {
         connect: "/bnb/token/new/connect",
         create: "/bnb/token/new/create",
         deploy: "/bnb/token/new/deploy",
+        finish: "/bnb/token/new/finish",
         next: "/bnb/token/new/next",
       },
     },

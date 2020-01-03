@@ -1,12 +1,13 @@
 import { crypto } from "@binance-chain/javascript-sdk";
-import { Backdrop, Box, Button, Container, FormControlLabel, Grid, Paper, Switch, Theme, Typography, withStyles } from "@material-ui/core";
-import CircularProgress from '@material-ui/core/CircularProgress';
+import { Backdrop, Box, Button, Container, FormControlLabel, Grid, Paper, Switch, TextField, Theme, Typography, withStyles } from "@material-ui/core";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import CancelOutlinedIcon from "@material-ui/icons/CancelOutlined";
 import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
 import { History } from "history";
 import React from "react";
 import { RouteComponentProps } from "react-router";
 import { Link } from "react-router-dom";
+import { SidebarNavigation } from ".";
 import { StepsSidebar, ToolbarPadding } from "../../../components";
 import routes from "../../../routes";
 import { styles } from "../../../theme";
@@ -27,31 +28,50 @@ export const Create = withStyles((theme: Theme) => ({
       fontSize: "1rem",
     },
   },
-}))(({ classes, match, history, ...props }: ICreate) => {
+}))(({ classes, history, ...props }: ICreate) => {
   const [network, setNetwork] = React.useState(networks.testnet);
   const [address, setAddress] = React.useState("");
+  const [keystore, setKeystore] = React.useState(ss.get("bnb", "keystore", ""));
+  const [publicKey, setPublicKey] = React.useState(ss.get("bnb", "publicKey", ""));
   const [isGettingAccount, setIsGettingAccount] = React.useState(false);
   const [isIssuingToken, setIsIssuingToken] = React.useState(false);
   const [balance, setBalance] = React.useState("0.00");
-  const [client, setClient] = React.useState(getClient(network));
+  const [password, setPassword] = React.useState<string | null>(null);
+  const passwordRef = React.useRef<HTMLInputElement>(null);
 
   React.useEffect(() => {
     getAddress();
   }, [network]);
 
   const onNetworkChange = (event: React.ChangeEvent<HTMLInputElement>, checked: boolean): void => {
-    setNetwork(network === networks.mainnet ? networks.testnet : networks.mainnet);
+    setNetwork(checked ? networks.mainnet : networks.testnet);
   };
 
   const onCreate = async () => {
     try {
       setIsIssuingToken(true);
+      const pwd = (passwordRef.current as HTMLInputElement).value;
+      const privateKey = crypto.getPrivateKeyFromKeyStore(keystore, pwd);
       const senderAddress = address;
       const tokenName = ls.get("bnb", "token.name");
       const symbol = ls.get("bnb", "token.symbol");
       const totalSupply = Number(ls.get("bnb", "token.supply"));
       const mintable = ls.get("bnb", "token.isMintable");
-      await token.issue(client)(senderAddress, tokenName, symbol, totalSupply, mintable);
+      const client = await getClient(network);
+      console.log(pwd, privateKey);
+      await client.initChain();
+      await client.setPrivateKey(privateKey);
+      const res = await token.issue(client)(
+        senderAddress,
+        tokenName,
+        symbol,
+        totalSupply,
+        mintable,
+      );
+      if (res.status === 200) {
+        ls.update("bnb", { token: { network, result: res.result[0] } });
+        history.push(routes.bnb.token.new.finish);
+      }
     } catch (error) {
       setIsIssuingToken(false);
       console.error(error);
@@ -66,11 +86,11 @@ export const Create = withStyles((theme: Theme) => ({
     try {
       setIsGettingAccount(true);
       setAddress("");
-      const privateKey = ss.get("bnb", "keystoreFile.privateKey", null);
-      client.chooseNetwork(network);
-      await client.setPrivateKey(privateKey);
+      const client = await getClient(network);
       await client.initChain();
-      const address = client.getClientKeyAddress();
+      const prefix = network === networks.mainnet ? "bnb" : "tbnb";
+      const address = crypto.getAddressFromPublicKey(publicKey, prefix);
+      console.log(address);
       setAddress(address);
       const account = await client.getAccount(address);
       console.log(account);
@@ -86,21 +106,18 @@ export const Create = withStyles((theme: Theme) => ({
 
   return (
     <Box display="flex">
-      <Backdrop
-        className={classes.backdrop}
-        open={isIssuingToken}
-      >
+      <Backdrop className={classes.backdrop} open={isIssuingToken}>
         <CircularProgress color="inherit" />
       </Backdrop>
       <StepsSidebar>
-        <h1></h1>
+        <SidebarNavigation history={history} {...props} />
       </StepsSidebar>
       <Container maxWidth="xl">
         <ToolbarPadding />
         <Box mb={4}>
           <Paper elevation={1}>
             <Box p={2}>
-              {Boolean(ss.get("bnb", "keystoreFile.privateKey", null)) ? (
+              {Boolean(keystore) && Boolean(publicKey) ? (
                 <>
                   <Typography gutterBottom variant="body2" className={classes.walletConnected}>
                     Your Binance Chain wallet is connected <CheckCircleOutlineIcon />
@@ -125,8 +142,8 @@ export const Create = withStyles((theme: Theme) => ({
                       <Typography>Checking your wallet balance...</Typography>
                     ) : (
                       <Typography>
-                        Your {network} account balance is 0.00. Please add {network} balance to your
-                        wallet in order to proceed.
+                        Your wallet address {address} balance is 0.00. Please add {network} balance
+                        to your wallet in order to proceed.
                       </Typography>
                     )}
                   </Box>
@@ -175,7 +192,7 @@ export const Create = withStyles((theme: Theme) => ({
                   </Typography>
                   <Typography>{ls.get("bnb", "token.isMintable", false) ? "Yes" : "No"}</Typography>
                 </Box>
-                <Box>
+                <Box mb={2}>
                   <Typography variant="body2" display="block" gutterBottom>
                     Network
                   </Typography>
@@ -190,6 +207,18 @@ export const Create = withStyles((theme: Theme) => ({
                     label={network}
                   />
                 </Box>
+                <Box maxWidth="25vw">
+                  <TextField
+                    label="Enter your wallet password"
+                    inputRef={passwordRef}
+                    fullWidth
+                    autoFocus
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
+                      setPassword(e.target.value);
+                    }}
+                    type="password"
+                  />
+                </Box>
               </Box>
               <Box mt={4}>
                 <Grid container spacing={2} justify="space-between">
@@ -199,7 +228,12 @@ export const Create = withStyles((theme: Theme) => ({
                     </Button>
                   </Grid>
                   <Grid item>
-                    <Button variant="contained" color="primary" onClick={onCreate} disabled={!Boolean(address) && balance !== "0.00"}>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={onCreate}
+                      disabled={!Boolean(address) || balance === "0.00" || !Boolean(password)}
+                    >
                       Create
                     </Button>
                   </Grid>

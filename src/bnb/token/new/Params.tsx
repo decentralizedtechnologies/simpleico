@@ -1,19 +1,8 @@
-import {
-  Box,
-  Button,
-  Checkbox,
-  Container,
-  FormControlLabel,
-  Grid,
-  Paper,
-  TextField,
-  Theme,
-  Typography,
-  withStyles,
-} from "@material-ui/core";
+import { Box, Button, Checkbox, Container, FormControlLabel, Grid, Paper, TextField, Theme, Typography, withStyles } from "@material-ui/core";
 import { History } from "history";
 import React from "react";
 import { RouteComponentProps } from "react-router";
+import { SidebarNavigation } from ".";
 import { StepsSidebar, ToolbarPadding } from "../../../components";
 import routes from "../../../routes";
 import ls from "../../../utils/ls";
@@ -24,10 +13,10 @@ interface IParams extends RouteComponentProps<{ id: string }> {
 }
 
 export const Params = withStyles((theme: Theme) => ({}))(
-  ({ classes, match, history, ...props }: IParams) => {
-    const [name, setName] = React.useState(ls.get("bnb", "token.name"));
-    const [symbol, setSymbol] = React.useState(ls.get("bnb", "token.symbol"));
-    const [supply, setSupply] = React.useState(ls.get("bnb", "token.supply"));
+  ({ classes, history, ...props }: IParams) => {
+    const [name, setName] = React.useState(ls.get("bnb", "token.name", ""));
+    const [symbol, setSymbol] = React.useState(ls.get("bnb", "token.symbol", ""));
+    const [supply, setSupply] = React.useState(ls.get("bnb", "token.supply", "90000000000"));
     const [isMintable, setIsMintable] = React.useState(ls.get("bnb", "token.isMintable", false));
 
     const onSetName = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -58,7 +47,7 @@ export const Params = withStyles((theme: Theme) => ({}))(
     return (
       <Box display="flex">
         <StepsSidebar>
-          <h1></h1>
+          <SidebarNavigation history={history} {...props} />
         </StepsSidebar>
         <Container maxWidth="xl">
           <ToolbarPadding />
@@ -148,11 +137,10 @@ export const Params = withStyles((theme: Theme) => ({}))(
                     <Grid item lg={6}>
                       <Box>
                         <Typography variant="body2">
-                          The initial supply of your token. This is up to you, but it commonly
+                          The initial supply of your token if mintable or maximum supply otherwise. This is up to you, but it commonly
                           represents the amount of shares your company is selling, or a fraction of
                           it. It can also represent only 1 object, like a car, and its price would
-                          be the actual value of the vehicle. The supply is limited to 1e8 for
-                          decimal part. The max total supply is 90 billion.
+                          be the actual value of the vehicle determined by the market. The max total supply is 90 billion. Our professional services can help you determine the correct supply.
                         </Typography>
                       </Box>
                     </Grid>

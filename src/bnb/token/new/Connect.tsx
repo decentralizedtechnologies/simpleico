@@ -3,9 +3,11 @@ import { Box, Button, Container, Grid, Paper, Tab, Tabs, TextField, Theme, Typog
 import { History } from "history";
 import React from "react";
 import { RouteComponentProps } from "react-router";
+import { SidebarNavigation } from ".";
 import { Dropzone, StepsSidebar, ToolbarPadding } from "../../../components";
 import routes from "../../../routes";
 import ls from "../../../utils/ls";
+import ss from "../../../utils/ss";
 
 interface IConnect extends RouteComponentProps<{ id: string }> {
   classes: any;
@@ -17,19 +19,20 @@ export const Connect = withStyles((theme: Theme) => ({
     borderRight: `1px solid ${theme.palette.primary.light}`,
     width: "20%",
   },
-}))(({ classes, match, history, ...props }: IConnect) => {
+}))(({ classes, history, ...props }: IConnect) => {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event: React.ChangeEvent<{}>, value: any): void => {
     setValue(value);
   };
 
-  const onNextWithKeystoreFile = (privateKey: string) => {
-    sessionStorage.setItem("bnb", JSON.stringify({ keystoreFile: { privateKey } }));
+  const onNextWithKeystoreFile = () => {
     history.push(routes.bnb.token.new.create);
   };
 
-  const onNext = () => {};
+  const onNext = () => {
+    history.push(routes.bnb.token.new.create);
+  };
 
   const onBack = () => {
     history.push(routes.bnb.token.new.params);
@@ -38,7 +41,7 @@ export const Connect = withStyles((theme: Theme) => ({
   return (
     <Box display="flex">
       <StepsSidebar>
-        <h1></h1>
+        <SidebarNavigation history={history} {...props} />
       </StepsSidebar>
       <Container maxWidth="xl">
         <ToolbarPadding />
@@ -103,15 +106,15 @@ export const Connect = withStyles((theme: Theme) => ({
                   className={classes.tabs}
                 >
                   <Tab label="Keystore File" />
-                  <Tab label="Recovery Phrase" />
+                  {/* <Tab label="Recovery Phrase" />
                   <Tab label="Ledger Device" />
                   <Tab label="Mobile Wallet" />
-                  <Tab label="Trezor Device" />
+                  <Tab label="Trezor Device" /> */}
                 </Tabs>
                 <TabPanel index={0} value={value}>
                   <KeystoreFile
-                    onNext={(privateKey: string) => {
-                      onNextWithKeystoreFile(privateKey);
+                    onNext={() => {
+                      onNextWithKeystoreFile();
                     }}
                   />
                 </TabPanel>
@@ -130,11 +133,29 @@ export const Connect = withStyles((theme: Theme) => ({
               </Box>
               <Box mt={4}>
                 <Grid container spacing={2} justify="space-between">
+                  <Grid item></Grid>
+                  {Boolean(ss.get("bnb", "keystore", null)) && (
+                    <Grid item>
+                      <Typography variant="body2">A wallet is already connected</Typography>
+                    </Grid>
+                  )}
+                </Grid>
+              </Box>
+              <Box>
+                <Grid container spacing={2} justify="space-between">
                   <Grid item>
+                    <Typography variant="body2"></Typography>
                     <Button variant="contained" onClick={onBack}>
                       Back
                     </Button>
                   </Grid>
+                  {Boolean(ss.get("bnb", "keystore", null)) && (
+                    <Grid item>
+                      <Button variant="contained" onClick={onNext}>
+                        Next
+                      </Button>
+                    </Grid>
+                  )}
                 </Grid>
               </Box>
             </Box>
@@ -171,23 +192,25 @@ const TabPanel = withStyles((theme: Theme) => ({
 );
 
 const KeystoreFile = withStyles((theme: Theme) => ({}))(
-  ({ classes, onNext, ...props }: { classes: any; onNext: (privateKey: string) => void }) => {
-    const [keystoreFile, setKeystoreFile] = React.useState<string | null>(null);
+  ({ classes, onNext, ...props }: { classes: any; onNext: () => void }) => {
+    const [keystore, setKeystore] = React.useState<string | null>(null);
     const [password, setPassword] = React.useState<string | null>(null);
     const passwordRef = React.useRef<HTMLInputElement>(null);
 
     const onUnlock = () => {
       try {
         const pwd = (passwordRef.current as HTMLInputElement).value;
-        const privateKey = crypto.getPrivateKeyFromKeyStore(keystoreFile, pwd);
-        onNext(privateKey);
+        const privateKey = crypto.getPrivateKeyFromKeyStore(keystore, pwd);
+        const publicKey = crypto.getPublicKeyFromPrivateKey(privateKey);
+        ss.update("bnb", { keystore, publicKey, });
+        onNext();
       } catch (error) {
         console.error(error);
       }
     };
 
     const onUnlockWithEnter = (e: React.KeyboardEvent<HTMLInputElement>): void => {
-      if (e.key === "Enter" && Boolean(password) && Boolean(keystoreFile)) {
+      if (e.key === "Enter" && Boolean(password) && Boolean(keystore)) {
         onUnlock();
       }
     };
@@ -196,7 +219,7 @@ const KeystoreFile = withStyles((theme: Theme) => ({}))(
       const reader = new FileReader();
       reader.onloadend = async () => {
         try {
-          setKeystoreFile(reader.result as string);
+          setKeystore(reader.result as string);
         } catch (error) {
           console.error(error);
         }
@@ -227,7 +250,7 @@ const KeystoreFile = withStyles((theme: Theme) => ({}))(
                 variant="contained"
                 color="primary"
                 onClick={onUnlock}
-                disabled={!Boolean(password) || !Boolean(keystoreFile)}
+                disabled={!Boolean(password) || !Boolean(keystore)}
               >
                 Unlock Wallet
               </Button>

@@ -5,16 +5,24 @@ export const networks = {
   testnet: "testnet",
 };
 
-const testnetURI = "https://testnet-dex.binance.org/";
-const mainnetURI = "https://dex.binance.org/";
+export const mainnetExplorerURI = "https://explorer.binance.org";
+export const testnetExplorerURI = "https://testnet-explorer.binance.org";
 
-// export const client = new BNBApiClient(network);
-// export const httpClient = axios.create({ baseURL: network });
+export const explorers = {
+  mainnet: mainnetExplorerURI,
+  testnet: testnetExplorerURI,
+};
+
+const mainnetURI = "https://dex.binance.org/";
+const testnetURI = "https://testnet-dex.binance.org/";
 
 export const getNetworkURI = (network: string) => {
-  return network === "mainnet" ? mainnetURI : testnetURI;
+  return network === networks.mainnet ? mainnetURI : testnetURI;
 };
 
-export const getClient = (network: string) => {
-  return new BNBApiClient(getNetworkURI(network));
-};
+export const getClient = async (network: string): Promise<any> =>
+  new Promise((resolve, reject) => {
+    const client = new BNBApiClient(getNetworkURI(network));
+    client.chooseNetwork(network);
+    resolve(client);
+  });

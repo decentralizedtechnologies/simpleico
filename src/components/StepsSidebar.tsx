@@ -41,15 +41,18 @@ export const StepsSidebar = withStyles((theme: Theme) => ({
       paper: classes.drawerPaper,
     }}
   >
-    <AppBar position="relative" elevation={0}>
-      <Toolbar>
-        <Box className={classes.logoBox}>
-          <Link to={routes.root}>
-            <img src="/svg/logo-simpleico-white.svg" width="100%" height="auto" />
-          </Link>
-        </Box>
-      </Toolbar>
-    </AppBar>
-    {children}
+    <Box display="flex" flexDirection="column" justifyContent="space-between" height="100%">
+      <AppBar position="relative" elevation={0}>
+        <Toolbar>
+          <Box className={classes.logoBox}>
+            <Link to={routes.root}>
+              <img src="/svg/logo-simpleico-white.svg" width="100%" height="auto" />
+            </Link>
+          </Box>
+        </Toolbar>
+      </AppBar>
+      <Box>{children}</Box>
+      <Box minHeight="15vh"></Box>
+    </Box>
   </Drawer>
 ));
