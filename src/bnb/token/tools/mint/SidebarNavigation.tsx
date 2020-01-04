@@ -2,8 +2,8 @@ import { Box, Theme, Typography } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
 import React from "react";
 import { Link, RouteComponentProps } from "react-router-dom";
-import { routes } from "../../../routes";
-import { styles } from "../../../theme";
+import { routes } from "../../../../routes";
+import { styles } from "../../../../theme";
 
 export const drawerWidth = 420;
 
@@ -21,26 +21,17 @@ export const SidebarNavigation = withStyles((theme: Theme) => ({
 
   return (
     <Box px={3}>
-      <Box width={140} mb={4}>
-        <img src="/svg/logo-binance-dex.svg" width="100%" height="auto" />
+      <Box mb={4}>
+        <Box width={140}>
+          <img src="/svg/logo-binance-dex.svg" width="100%" height="auto" />
+        </Box>
+        <Typography style={{ color: "white" }}>BEP2 Token Tools · Mint</Typography>
       </Box>
       <Box mb={2}>
         <Link
-          to={routes.bnb.token.new.params}
+          to={routes.bnb.token.tools.mint.connect}
           className={
-            isSelected(routes.bnb.token.new.params)
-              ? `${classes.sidebarNavigationSelectedLink} ${classes.sidebarNavigationLink}`
-              : classes.sidebarNavigationLink
-          }
-        >
-          <Typography variant="body2">Params</Typography>
-        </Link>
-      </Box>
-      <Box mb={2}>
-        <Link
-          to={routes.bnb.token.new.connect}
-          className={
-            isSelected(routes.bnb.token.new.connect)
+            isSelected(routes.bnb.token.tools.mint.connect)
               ? `${classes.sidebarNavigationSelectedLink} ${classes.sidebarNavigationLink}`
               : classes.sidebarNavigationLink
           }
@@ -50,21 +41,21 @@ export const SidebarNavigation = withStyles((theme: Theme) => ({
       </Box>
       <Box mb={2}>
         <Link
-          to={routes.bnb.token.new.create}
+          to={routes.bnb.token.tools.mint.params}
           className={
-            isSelected(routes.bnb.token.new.create)
+            isSelected(routes.bnb.token.tools.mint.params)
               ? `${classes.sidebarNavigationSelectedLink} ${classes.sidebarNavigationLink}`
               : classes.sidebarNavigationLink
           }
         >
-          <Typography variant="body2">Create</Typography>
+          <Typography variant="body2">Params</Typography>
         </Link>
       </Box>
       <Box>
         <Typography
           variant="body2"
           className={
-            isSelected(routes.bnb.token.new.finish)
+            isSelected(routes.bnb.token.tools.mint.finish)
               ? `${classes.sidebarNavigationSelectedLink} ${classes.sidebarNavigationLink}`
               : classes.sidebarNavigationLink
           }

@@ -7,6 +7,7 @@ import {
   Params as BNBTokenNewParams,
 } from "./bnb/token/new";
 import { Select as BNBTokenToolsSelect } from "./bnb/token/tools";
+import { Connect as BNBTokenToolsMintConnect } from "./bnb/token/tools/mint";
 import { routes } from "./routes";
 
 const App: React.FC = () => (
@@ -18,6 +19,7 @@ const App: React.FC = () => (
     <Route path={routes.bnb.token.new.finish} component={BNBTokenNewFinish} />
 
     <Route path={routes.bnb.token.tools.select} component={BNBTokenToolsSelect} />
+    <Route path={routes.bnb.token.tools.mint.connect} component={BNBTokenToolsMintConnect} />
   </Router>
 );
 

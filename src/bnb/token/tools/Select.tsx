@@ -1,4 +1,15 @@
-import { Box, Card, CardContent, CardHeader, Container, Grid, Paper, Theme, Typography, withStyles } from "@material-ui/core";
+import {
+  Box,
+  Card,
+  CardContent,
+  CardHeader,
+  Container,
+  Grid,
+  Paper,
+  Theme,
+  Typography,
+  withStyles,
+} from "@material-ui/core";
 import React from "react";
 import { RouteComponentProps } from "react-router";
 import { StepsSidebar, ToolbarPadding } from "../../../components";
@@ -60,7 +71,7 @@ export const Select = withStyles((theme: Theme) => ({
               <Card
                 className={classes.card}
                 onClick={() => {
-                  history.push(routes.bnb.token.tools.mint.params);
+                  history.push(routes.bnb.token.tools.mint.connect);
                 }}
               >
                 <CardHeader title="Mint" />

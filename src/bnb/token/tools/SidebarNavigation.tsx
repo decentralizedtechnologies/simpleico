@@ -3,6 +3,7 @@ import { withStyles } from "@material-ui/styles";
 import React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { routes } from "../../../routes";
+import { styles } from "../../../theme";
 
 export const drawerWidth = 420;
 
@@ -11,16 +12,7 @@ interface ISidebarNavigationProps extends RouteComponentProps<{ id: string }> {
 }
 
 export const SidebarNavigation = withStyles((theme: Theme) => ({
-  link: {
-    color: "white",
-    textDecoration: "none",
-  },
-  selected: {
-    fontWeight: 700,
-    "& p": {
-      fontWeight: 700,
-    },
-  },
+  ...styles(theme),
 }))(({ classes, history, match }: ISidebarNavigationProps) => {
   const isSelected = (route: string): boolean => {
     const regexp = new RegExp(route, "gi");
@@ -37,8 +29,8 @@ export const SidebarNavigation = withStyles((theme: Theme) => ({
           variant="body2"
           className={
             isSelected(routes.bnb.token.tools.select)
-              ? `${classes.selected} ${classes.link}`
-              : classes.link
+              ? `${classes.sidebarNavigationSelectedLink} ${classes.sidebarNavigationLink}`
+              : classes.sidebarNavigationLink
           }
         >
           Select

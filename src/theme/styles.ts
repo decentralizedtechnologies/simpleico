@@ -22,4 +22,14 @@ export const styles = (theme: Theme) => ({
     marginTop: theme.spacing(1),
     marginLeft: theme.spacing(1),
   },
+  sidebarNavigationLink: {
+    color: "white",
+    textDecoration: "none",
+  },
+  sidebarNavigationSelectedLink: {
+    fontWeight: 700,
+    "& p": {
+      fontWeight: 700,
+    },
+  },
 });
