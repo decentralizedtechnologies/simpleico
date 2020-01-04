@@ -58,7 +58,6 @@ export const Create = withStyles((theme: Theme) => ({
       const totalSupply = Number(ls.get("bnb", "token.supply"));
       const mintable = ls.get("bnb", "token.isMintable");
       const client = await getClient(network);
-      console.log(pwd, privateKey);
       await client.initChain();
       await client.setPrivateKey(privateKey);
       const res = await token.issue(client)(

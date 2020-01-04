@@ -53,6 +53,13 @@ BNB:
 - [ ] Complete error management upon creation
 - [x] Display the Binance Chain transaction ID on success
 
+#### BEP32 token tools
+
+- [ ] Mint an existing token
+- [ ] Burn an existing token
+- [ ] Freeze an existing token
+- [ ] Unfreeze an existing token
+
 ### Ethereum <a name="ethereum"></a>
 
 #### Create new ERC20 token
