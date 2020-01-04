@@ -1,44 +1,92 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Simple ICO is a blockchain agnostic React dApp that allows anyone in the world to create a digital asset.
 
-## Available Scripts
+Simple ICO will not, at any moment, store the user's private keys. You can run a local copy of the dApp if in doubt.
 
-In the project directory, you can run:
+# Disclaimer
 
-### `npm start`
+The Simple ICO team is not responsible of the use of this computer code and the digital assets created with this decentralized web application.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# Table of contents
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+1. [Motivation](#motivation)
+1. [Roadmap](#roadmap)
+1. [Binance chain](#binance-chain)
+1. [Ethereum](#ethereum)
+1. [Contributing](#contributing)
+1. [Local development](#local-development)
+1. [Architecture](#architecture)
+   1. [Binance Chain](#architecture-bnb)
 
-### `npm test`
+## Motivation <a name="motivation"></a>
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Global financial inclusion. Allow the individual to get access to capital.
 
-### `npm run build`
+```
+Donate
+Your economic contributions go directly to the development of the decentralizedtechnologies.io ecosystem. d/t is an open-source movement in Central America that pursuits blockchain mass adoption.
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+BTC:
+ETH:
+BNB:
+```
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+## Roadmap <a name="roadmap"></a>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+[ ] Homepage (with nextjs or other, for SEO purposes)
+[ ] Internet Crowd Offerings campaigns page (with nextjs or other, for SEO purposes)
+[ ] FAQs page
+[ ] Mobile responsiveness
 
-### `npm run eject`
+### Binance Chain <a name="binance-chain"></a>
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### Create new BEP32 token
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- [x] Set the params of the token (name, symbol, supply, mintable)
+- [x] Connect the binance wallet using a keystore file
+- [ ] Connect the binance wallet using Wallet Connect
+- [ ] Connect the binance wallet using a Ledger Device
+- [ ] Connect the binance wallet using a Trezor Device
+- [ ] Connect the binance wallet using a Mnemonic phrase
+- [x] Create the BEP32 token using the specified params
+- [ ] Complete error management upon creation
+- [x] Display the Binance Chain transaction ID on success
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Ethereum <a name="ethereum"></a>
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- [ ] Set the params of the token (name, symbol, supply, mintable)
+- [ ] Connect an Ethereum wallet using Web3.JS or EthersJS
+- [ ] Create the ERC20 token using the specified params
+- [ ] Complete error management upon creation
+- [ ] Display the Ethereum transaction ID on success
 
-## Learn More
+## Contributing <a name="contributing"></a>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Please refer to the [roadmap](#roadmap) for the current state of development and submit a pull-request for approval.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Submit an issue for improvement proposals or bugs.
+
+### Local development <a name="local-development"></a>
+
+#### `git clone git@github.com:decentralizedtechnologies/simpleico.git`
+
+Get a copy of the code by cloning or forking this repo.
+
+#### `yarn`
+
+Install the npm dependencies.
+
+#### `yarn start`
+
+Run the project in localhost.
+
+### Architecture <a name="architecture"></a>
+
+Begin by looking at the [routes.ts](https://github.com/decentralizedtechnologies/simpleico/blob/master/src/routes.ts) file.
+
+Then the `src/` directory should follow the same structure. eg. `src/bnb/token/new/`. The views or main screens correspond to the last segment of each route. eg. `src/bnb/token/new/Params.tsx`.
+
+#### Binance Chain <a name="architecture-bnb"></a>
+
+Binance Chain uses the [@binance-chain/javascript-sdk](https://github.com/binance-chain/javascript-sdk/). Refer to the wiki for examples and documentation.
+
+The code using this SDK is in `src/bnb/client/`.
