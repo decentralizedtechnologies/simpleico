@@ -6,6 +6,7 @@ import { SidebarNavigation } from ".";
 import { StepsSidebar, ToolbarPadding } from "../../../components";
 import routes from "../../../routes";
 import ls from "../../../utils/ls";
+import { SidebarFooter } from "../../components";
 
 interface IParams extends RouteComponentProps<{ id: string }> {
   classes: any;
@@ -46,7 +47,7 @@ export const Params = withStyles((theme: Theme) => ({}))(
 
     return (
       <Box display="flex">
-        <StepsSidebar>
+        <StepsSidebar footer={<SidebarFooter history={history} {...props} />}>
           <SidebarNavigation history={history} {...props} />
         </StepsSidebar>
         <Container maxWidth="xl">

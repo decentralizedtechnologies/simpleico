@@ -8,6 +8,7 @@ import { Dropzone, StepsSidebar, ToolbarPadding } from "../../../components";
 import routes from "../../../routes";
 import ls from "../../../utils/ls";
 import ss from "../../../utils/ss";
+import { SidebarFooter } from "../../components";
 
 interface IConnect extends RouteComponentProps<{ id: string }> {
   classes: any;
@@ -40,7 +41,7 @@ export const Connect = withStyles((theme: Theme) => ({
 
   return (
     <Box display="flex">
-      <StepsSidebar>
+      <StepsSidebar footer={<SidebarFooter history={history} {...props} />}>
         <SidebarNavigation history={history} {...props} />
       </StepsSidebar>
       <Container maxWidth="xl">

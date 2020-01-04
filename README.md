@@ -41,7 +41,7 @@ BNB:
 
 ### Binance Chain <a name="binance-chain"></a>
 
-#### Create new BEP32 token
+#### Create new BEP2 token
 
 - [x] Set the params of the token (name, symbol, supply, mintable)
 - [x] Connect the binance wallet using a keystore file
@@ -49,11 +49,11 @@ BNB:
 - [ ] Connect the binance wallet using a Ledger Device
 - [ ] Connect the binance wallet using a Trezor Device
 - [ ] Connect the binance wallet using a Mnemonic phrase
-- [x] Create the BEP32 token using the specified params
+- [x] Create the BEP2 token using the specified params
 - [ ] Complete error management upon creation
 - [x] Display the Binance Chain transaction ID on success
 
-#### BEP32 token tools
+#### BEP2 token tools
 
 - [ ] Mint an existing token
 - [ ] Burn an existing token

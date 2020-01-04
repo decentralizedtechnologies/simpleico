@@ -15,6 +15,7 @@ import ls from "../../../utils/ls";
 import ss from "../../../utils/ss";
 import { getClient, networks } from "../../client";
 import token from "../../client/token";
+import { SidebarFooter } from "../../components";
 
 interface ICreate extends RouteComponentProps<{ id: string }> {
   classes: any;
@@ -108,7 +109,7 @@ export const Create = withStyles((theme: Theme) => ({
       <Backdrop className={classes.backdrop} open={isIssuingToken}>
         <CircularProgress color="inherit" />
       </Backdrop>
-      <StepsSidebar>
+      <StepsSidebar footer={<SidebarFooter history={history} {...props} />}>
         <SidebarNavigation history={history} {...props} />
       </StepsSidebar>
       <Container maxWidth="xl">

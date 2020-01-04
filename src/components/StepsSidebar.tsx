@@ -11,6 +11,7 @@ interface IStepsSidebarProps {
   classes: any;
   history?: History;
   children: any;
+  footer?: any;
 }
 
 export const StepsSidebar = withStyles((theme: Theme) => ({
@@ -33,7 +34,7 @@ export const StepsSidebar = withStyles((theme: Theme) => ({
     justifyContent: "center",
     width: 120,
   },
-}))(({ classes, history, children }: IStepsSidebarProps) => (
+}))(({ classes, history, children, footer }: IStepsSidebarProps) => (
   <Drawer
     className={classes.drawer}
     variant="permanent"
@@ -51,8 +52,8 @@ export const StepsSidebar = withStyles((theme: Theme) => ({
           </Box>
         </Toolbar>
       </AppBar>
-      <Box>{children}</Box>
-      <Box minHeight="15vh"></Box>
+      {children}
+      {footer && footer}
     </Box>
   </Drawer>
 ));
