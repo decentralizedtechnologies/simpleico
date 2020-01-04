@@ -10,11 +10,11 @@ The Simple ICO team is not responsible of the use of this computer code and the 
 
 1. [Motivation](#motivation)
 1. [Roadmap](#roadmap)
-1. [Binance chain](#binance-chain)
-1. [Ethereum](#ethereum)
+   1. [Binance chain](#binance-chain)
+   1. [Ethereum](#ethereum)
 1. [Contributing](#contributing)
-1. [Local development](#local-development)
-1. [Architecture](#architecture)
+   1. [Local development](#local-development)
+   1. [Architecture](#architecture)
    1. [Binance Chain](#architecture-bnb)
 
 ## Motivation <a name="motivation"></a>
@@ -23,7 +23,8 @@ Global financial inclusion. Allow the individual to get access to capital.
 
 ```
 Donate
-Your economic contributions go directly to the development of the decentralizedtechnologies.io ecosystem. d/t is an open-source movement in Central America that pursuits blockchain mass adoption.
+Your economic contributions go directly to the development of the decentralizedtechnologies.io ecosystem.
+d/t is an open-source movement in Central America that pursuits blockchain mass adoption.
 
 BTC:
 ETH:
@@ -32,10 +33,10 @@ BNB:
 
 ## Roadmap <a name="roadmap"></a>
 
-[ ] Homepage (with nextjs or other, for SEO purposes)
-[ ] Internet Crowd Offerings campaigns page (with nextjs or other, for SEO purposes)
-[ ] FAQs page
-[ ] Mobile responsiveness
+- [ ] Homepage (with nextjs or other, for SEO purposes)
+- [ ] Internet Crowd Offerings campaigns page (with nextjs or other, for SEO purposes)
+- [ ] FAQs page
+- [ ] Mobile responsiveness
 
 ### Binance Chain <a name="binance-chain"></a>
 
