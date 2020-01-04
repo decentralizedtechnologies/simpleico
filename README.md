@@ -12,6 +12,7 @@ The Simple ICO team is not responsible of the use of this computer code and the 
 1. [Roadmap](#roadmap)
    1. [Binance chain](#binance-chain)
    1. [Ethereum](#ethereum)
+   1. [Arweave](#arweave)
 1. [Contributing](#contributing)
    1. [Local development](#local-development)
    1. [Architecture](#architecture)
@@ -54,11 +55,27 @@ BNB:
 
 ### Ethereum <a name="ethereum"></a>
 
+#### Create new ERC20 token
+
 - [ ] Set the params of the token (name, symbol, supply, mintable)
 - [ ] Connect an Ethereum wallet using Web3.JS or EthersJS
 - [ ] Create the ERC20 token using the specified params
 - [ ] Complete error management upon creation
 - [ ] Display the Ethereum transaction ID on success
+
+#### Create new ERC20 crowdsale contract
+
+- [ ] Set the ETH price of each ERC20 token unit
+- [ ] Deploy the [crowdsale contract](https://github.com/OpenZeppelin/openzeppelin-contracts/tree/master/contracts/crowdsale) to testnet or mainnet
+- [ ] Display the transaction ID of the new crowdsale contract
+- [ ] Add a QR Code widget to display on the ICO Arweave landing pages
+
+### Arweave.org <a name="arweave"></a>
+
+- [ ] Create a custom ICO campaign landing page using [GrapesJS](https://grapesjs.com/)
+- [ ] Upload the landing page to Arweave.org blockchain
+- [ ] Error management upon deployment
+- [ ] Display the arweave URL on success
 
 ## Contributing <a name="contributing"></a>
 
