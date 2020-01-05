@@ -6,7 +6,7 @@ import { SidebarNavigation } from ".";
 import { StepsSidebar, ToolbarPadding } from "../../../../components";
 import routes from "../../../../routes";
 import { styles } from "../../../../theme";
-import { ls } from "../../../../utils";
+import { ls, ss } from "../../../../utils";
 import { explorers, networks } from "../../../client";
 import { SidebarFooter } from "../../../components";
 
@@ -63,7 +63,7 @@ export const Finish = withStyles((theme: Theme) => ({
                     Nothing to see here.
                   </Typography>
                   <Typography variant="body2">
-                    <Link to={routes.bnb.token.new.params}>Create a BEP2 token now</Link>
+                    <Link to={routes.bnb.token.tools.mint.connect}>Mint a BEP2 token now</Link>
                   </Typography>
                 </>
               )}

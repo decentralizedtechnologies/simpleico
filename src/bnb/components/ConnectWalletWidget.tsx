@@ -3,6 +3,7 @@ import {
   Box,
   Button,
   Grid,
+  Link,
   Tab,
   Tabs,
   TextField,
@@ -196,7 +197,12 @@ const KeystoreFile = withStyles((theme: Theme) => ({}))(
           type="password"
         />
         <Box mt={4}>
-          <Grid container spacing={2} justify="flex-end">
+          <Grid container spacing={2} justify="space-between">
+            <Grid item>
+              <Link href="https://www.binance.org/en/create" target="_blank" rel="nofollow">
+                Create a new wallet
+              </Link>
+            </Grid>
             <Grid item>
               <Button
                 variant="contained"
