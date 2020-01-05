@@ -66,6 +66,7 @@ export const Params = withStyles((theme: Theme) => ({
 
   const onMint = async () => {
     try {
+      setOpen(false);
       setIsMintingToken(true);
       const pwd = (passwordRef.current as HTMLInputElement).value;
       const privateKey = crypto.getPrivateKeyFromKeyStore(keystore, pwd);
