@@ -32,4 +32,12 @@ export const styles = (theme: Theme) => ({
       fontWeight: 700,
     },
   },
+  card: {
+    "&:hover": {
+      cursor: "pointer",
+    },
+  },
+  cardContent: {
+    minHeight: 80,
+  },
 });

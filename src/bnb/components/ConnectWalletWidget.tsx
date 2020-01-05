@@ -1,15 +1,25 @@
 import { crypto } from "@binance-chain/javascript-sdk";
-import { Box, Button, Grid, Tab, Tabs, TextField, Theme, Typography, withStyles } from "@material-ui/core";
+import {
+  Box,
+  Button,
+  Grid,
+  Tab,
+  Tabs,
+  TextField,
+  Theme,
+  Typography,
+  withStyles,
+} from "@material-ui/core";
 import React from "react";
 import { RouteComponentProps } from "react-router";
 import { Dropzone } from "../../components";
-import routes from "../../routes";
 import ss from "../../utils/ss";
 
 interface IConnectWalletWidget extends RouteComponentProps<{ id: string }> {
   classes: any;
   onBack?: () => any;
   onNext?: () => any;
+  onNextWithKeystoreFile: () => any;
 }
 
 export const ConnectWalletWidget = withStyles((theme: Theme) => ({
@@ -17,91 +27,96 @@ export const ConnectWalletWidget = withStyles((theme: Theme) => ({
     borderRight: `1px solid ${theme.palette.primary.light}`,
     width: "20%",
   },
-}))(({ classes, history, onNext, onBack, ...props }: IConnectWalletWidget) => {
-  const [value, setValue] = React.useState(0);
+}))(
+  ({
+    classes,
+    history,
+    onNext,
+    onBack,
+    onNextWithKeystoreFile,
+    ...props
+  }: IConnectWalletWidget) => {
+    const [value, setValue] = React.useState(0);
 
-  const handleChange = (event: React.ChangeEvent<{}>, value: any): void => {
-    setValue(value);
-  };
+    const handleChange = (event: React.ChangeEvent<{}>, value: any): void => {
+      setValue(value);
+    };
 
-  const onNextWithKeystoreFile = () => {
-    history.push(routes.bnb.token.new.create);
-  };
-
-  return (
-    <>
-      <Typography gutterBottom variant="body2">
-        Simple ICO will NOT store your private keys at any time.{" "}
-        <a href="https://github.com/decentralizedtechnologies/simpleico" target="_blank">
-          You can check the code here,
-        </a>{" "}
-        and you can even run a copy of the Simple ICO dApp on your computer if in doubt.
-      </Typography>
-      <Box mt={4} display="flex" flexGrow={1}>
-        <Tabs
-          orientation="vertical"
-          value={value}
-          onChange={handleChange}
-          aria-label="Vertical tabs example"
-          className={classes.tabs}
-        >
-          <Tab label="Keystore File" />
-          {/* <Tab label="Recovery Phrase" />
+    return (
+      <>
+        <Typography gutterBottom variant="body2">
+          Simple ICO will NOT store your private keys at any time.{" "}
+          <a href="https://github.com/decentralizedtechnologies/simpleico" target="_blank">
+            You can check the code here,
+          </a>{" "}
+          and you can even run a copy of the Simple ICO dApp on your computer if in doubt.
+        </Typography>
+        <Box mt={4} display="flex" flexGrow={1}>
+          <Tabs
+            orientation="vertical"
+            value={value}
+            onChange={handleChange}
+            aria-label="Vertical tabs example"
+            className={classes.tabs}
+          >
+            <Tab label="Keystore File" />
+            {/* <Tab label="Recovery Phrase" />
                   <Tab label="Ledger Device" />
                   <Tab label="Mobile Wallet" />
                   <Tab label="Trezor Device" /> */}
-        </Tabs>
-        <TabPanel index={0} value={value}>
-          <KeystoreFile
-            onNext={() => {
-              onNextWithKeystoreFile();
-            }}
-          />
-        </TabPanel>
-        <TabPanel index={1} value={value}>
-          Recovery Phrase
-        </TabPanel>
-        <TabPanel index={2} value={value}>
-          Ledger Device
-        </TabPanel>
-        <TabPanel index={3} value={value}>
-          Mobile Wallet
-        </TabPanel>
-        <TabPanel index={4} value={value}>
-          Trezor Device
-        </TabPanel>
-      </Box>
-      <Box mt={4}>
-        <Grid container spacing={2} justify="space-between">
-          <Grid item></Grid>
-          {Boolean(ss.get("bnb", "keystore", null)) && (
-            <Grid item>
-              <Typography variant="body2">A wallet is already connected</Typography>
-            </Grid>
-          )}
-        </Grid>
-      </Box>
-      <Box>
-        <Grid container spacing={2} justify="space-between">
-          <Grid item>
-            {Boolean(onBack) &&
-              <Button variant="contained" onClick={onBack}>
-                Back
-              </Button>
-            }
+          </Tabs>
+          <TabPanel index={0} value={value}>
+            <KeystoreFile
+              onNext={() => {
+                onNextWithKeystoreFile();
+              }}
+            />
+          </TabPanel>
+          <TabPanel index={1} value={value}>
+            Recovery Phrase
+          </TabPanel>
+          <TabPanel index={2} value={value}>
+            Ledger Device
+          </TabPanel>
+          <TabPanel index={3} value={value}>
+            Mobile Wallet
+          </TabPanel>
+          <TabPanel index={4} value={value}>
+            Trezor Device
+          </TabPanel>
+        </Box>
+        <Box mt={4}>
+          <Grid container spacing={2} justify="space-between">
+            <Grid item></Grid>
+            {Boolean(ss.get("bnb", "keystore", null)) && (
+              <Grid item>
+                <Typography variant="body2">A wallet is already connected</Typography>
+              </Grid>
+            )}
           </Grid>
-          {Boolean(ss.get("bnb", "keystore", null)) && (
+        </Box>
+        <Box>
+          <Grid container spacing={2} justify="space-between">
             <Grid item>
-              <Button variant="contained" onClick={onNext}>
-                Next
-              </Button>
+              {Boolean(onBack) && (
+                <Button variant="contained" onClick={onBack}>
+                  Back
+                </Button>
+              )}
             </Grid>
-          )}
-        </Grid>
-      </Box>
-    </>
-  );
-});
+            {Boolean(ss.get("bnb", "keystore", null)) && (
+              <Grid item>
+                <Button variant="contained" onClick={onNext}>
+                  Next
+                </Button>
+              </Grid>
+            )}
+          </Grid>
+        </Box>
+      </>
+    );
+  },
+);
 
 const TabPanel = withStyles((theme: Theme) => ({
   tabPanel: {

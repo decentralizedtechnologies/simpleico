@@ -10,7 +10,9 @@ const get = (key: string, chain: string, fallback?: any) => {
   return _get(JSON.parse(sessionStorage.getItem(key) || "{}"), chain, fallback || "");
 };
 
-export default {
+export const ss = {
   update,
   get,
 };
+
+export default ss;

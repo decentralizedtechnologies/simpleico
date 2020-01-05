@@ -21,6 +21,10 @@ export const Connect = withStyles((theme: Theme) => ({
     history.push(routes.bnb.token.new.params);
   };
 
+  const onNextWithKeystoreFile = () => {
+    history.push(routes.bnb.token.tools.mint.params);
+  };
+
   return (
     <Box display="flex">
       <StepsSidebar footer={<SidebarFooter history={history} {...props} />}>
@@ -73,7 +77,7 @@ export const Connect = withStyles((theme: Theme) => ({
           <Paper elevation={1}>
             <Box p={2}>
               <Typography gutterBottom>Step 2 · Connect your Binance Chain wallet.</Typography>
-              <ConnectWalletWidget onNext={onNext} onBack={onBack} history={history} {...props} />
+              <ConnectWalletWidget onNext={onNext} onBack={onBack} onNextWithKeystoreFile={onNextWithKeystoreFile} history={history} {...props} />
             </Box>
           </Paper>
         </Box>

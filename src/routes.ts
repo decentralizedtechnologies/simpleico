@@ -14,8 +14,8 @@ export const routes = {
       tools: {
         select: "/bnb/bep2/tools/select",
         mint: {
-          params: "/bnb/bep2/mint/params",
           connect: "/bnb/bep2/mint/connect",
+          params: "/bnb/bep2/mint/params",
           run: "/bnb/bep2/mint/run",
           finish: "/bnb/bep2/mint/finish",
         },

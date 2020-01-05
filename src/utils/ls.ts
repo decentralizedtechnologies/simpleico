@@ -10,7 +10,9 @@ const get = (key: string, chain: string, fallback?: any) => {
   return _get(JSON.parse(localStorage.getItem(key) || "{}"), chain, fallback || "");
 };
 
-export default {
+export const ls = {
   update,
   get,
 };
+
+export default ls;

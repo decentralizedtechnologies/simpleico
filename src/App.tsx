@@ -1,13 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import {
-  Connect as BNBTokenNewConnect,
-  Create as BNBTokenNewCreate,
-  Finish as BNBTokenNewFinish,
-  Params as BNBTokenNewParams,
-} from "./bnb/token/new";
+import { Connect as BNBTokenNewConnect, Create as BNBTokenNewCreate, Finish as BNBTokenNewFinish, Params as BNBTokenNewParams } from "./bnb/token/new";
 import { Select as BNBTokenToolsSelect } from "./bnb/token/tools";
-import { Connect as BNBTokenToolsMintConnect } from "./bnb/token/tools/mint";
+import { Connect as BNBTokenToolsMintConnect, Params as BNBTokenToolsMintParams } from "./bnb/token/tools/mint";
 import { routes } from "./routes";
 
 const App: React.FC = () => (
@@ -20,6 +15,7 @@ const App: React.FC = () => (
 
     <Route path={routes.bnb.token.tools.select} component={BNBTokenToolsSelect} />
     <Route path={routes.bnb.token.tools.mint.connect} component={BNBTokenToolsMintConnect} />
+    <Route path={routes.bnb.token.tools.mint.params} component={BNBTokenToolsMintParams} />
   </Router>
 );
 

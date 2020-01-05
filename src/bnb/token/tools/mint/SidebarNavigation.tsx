@@ -48,7 +48,7 @@ export const SidebarNavigation = withStyles((theme: Theme) => ({
               : classes.sidebarNavigationLink
           }
         >
-          <Typography variant="body2">Params</Typography>
+          <Typography variant="body2">Amount</Typography>
         </Link>
       </Box>
       <Box>

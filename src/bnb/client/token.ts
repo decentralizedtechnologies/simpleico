@@ -5,13 +5,37 @@ const issue = (client: any) => {
     symbol: string,
     totalSupply: number,
     mintable: boolean,
-  ): Promise<{result: any; status: number}> => {
+  ): Promise<{ result: any; status: number }> => {
     try {
-      console.log(client);
       client.useDefaultSigningDelegate();
       client.useDefaultBroadcastDelegate();
       client.tokens._bncClient = client;
-      const res = await client.tokens.issue(senderAddress, tokenName, symbol, totalSupply, mintable);
+      const res = await client.tokens.issue(
+        senderAddress,
+        tokenName,
+        symbol,
+        totalSupply,
+        mintable,
+      );
+      console.log(res);
+      return res;
+    } catch (error) {
+      throw error;
+    }
+  };
+};
+
+const mint = (client: any) => {
+  return async (
+    senderAddress: string,
+    symbol: string,
+    amount: number,
+  ): Promise<{ result: any; status: number }> => {
+    try {
+      client.useDefaultSigningDelegate();
+      client.useDefaultBroadcastDelegate();
+      client.tokens._bncClient = client;
+      const res = await client.tokens.mint(senderAddress, symbol, amount);
       console.log(res);
       return res;
     } catch (error) {
@@ -22,4 +46,5 @@ const issue = (client: any) => {
 
 export default {
   issue,
+  mint,
 };

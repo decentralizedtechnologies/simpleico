@@ -1,5 +1,4 @@
 import { Box, Button, Checkbox, Container, FormControlLabel, Grid, Paper, TextField, Theme, Typography, withStyles } from "@material-ui/core";
-import { History } from "history";
 import React from "react";
 import { RouteComponentProps } from "react-router";
 import { SidebarNavigation } from ".";
@@ -10,7 +9,6 @@ import { SidebarFooter } from "../../components";
 
 interface IParams extends RouteComponentProps<{ id: string }> {
   classes: any;
-  history: History;
 }
 
 export const Params = withStyles((theme: Theme) => ({}))(
