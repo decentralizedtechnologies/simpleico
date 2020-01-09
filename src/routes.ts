@@ -1,6 +1,20 @@
 export const routes = {
-  root: "/",
+  // root: "/",
+  root: "/eth/erc20/new/params",
   home: {},
+  eth: {
+    erc20: {
+      new: {
+        params: "/eth/erc20/new/params",
+        connect: "/eth/erc20/new/connect",
+        create: "/eth/erc20/new/create",
+        finish: "/eth/erc20/new/finish",
+      },
+      tools: {
+        select: "/eth/erc20/tools",
+      },
+    },
+  },
   bnb: {
     token: {
       new: {

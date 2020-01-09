@@ -28,8 +28,8 @@ export const SidebarFooter = withStyles((theme: Theme) => ({
       <Grid container>
         <Grid item lg={10}>
           <Typography variant="body2">
-            <Link to={routes.bnb.token.tools.select} className={classes.link}>
-              BEP2 token tools
+            <Link to={routes.eth.erc20.tools.select} className={classes.link}>
+              ERC20 token tools
             </Link>
           </Typography>
         </Grid>

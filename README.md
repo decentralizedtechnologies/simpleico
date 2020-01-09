@@ -55,10 +55,10 @@ BNB:
 
 #### BEP2 token tools
 
-- [ ] Mint an existing token
-- [ ] Burn an existing token
-- [ ] Freeze an existing token
-- [ ] Unfreeze an existing token
+- [x] Mint an existing token flow
+- [ ] Burn an existing token flow
+- [ ] Freeze an existing token flow
+- [ ] Unfreeze an existing token flow
 
 ### Ethereum <a name="ethereum"></a>
 

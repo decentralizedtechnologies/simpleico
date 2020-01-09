@@ -162,7 +162,7 @@ export const Create = withStyles((theme: Theme) => ({
         <Box mb={4}>
           <Paper elevation={1}>
             <Box p={2}>
-              <Typography gutterBottom>Step 3 · Create your token.</Typography>
+              <Typography gutterBottom>Step 3 · Create your token</Typography>
               <Typography variant="body2">
                 In this step you will sign a transaction in the Binance {network}. Confirm your
                 information and then click "Create".
