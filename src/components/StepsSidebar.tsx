@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import routes from "../routes";
 
 export const drawerWidth = 420;
+export const drawerWidthMD = 280;
 
 interface IStepsSidebarProps {
   classes: any;
@@ -18,6 +19,9 @@ export const StepsSidebar = withStyles((theme: Theme) => ({
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
+    [theme.breakpoints.down("md")]: {
+      width: drawerWidthMD,
+    }
   },
   drawerPaper: {
     width: drawerWidth,
@@ -26,6 +30,9 @@ export const StepsSidebar = withStyles((theme: Theme) => ({
     "& svg": {
       color: "white",
     },
+    [theme.breakpoints.down("md")]: {
+      width: drawerWidthMD,
+    }
   },
   logoBox: {
     minHeight: 98,

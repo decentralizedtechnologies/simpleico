@@ -21,7 +21,7 @@ import { routes } from "./routes";
 
 const App: React.FC = () => (
   <Router>
-    {/* <Route path={routes.root} component={StockUnitIndex} /> */}
+    <Route path={routes.root} exact component={ETH_ERC20NewParams} />
     {/* Binance Chain */}
     <Route path={routes.bnb.token.new.params} component={BNBTokenNewParams} />
     <Route path={routes.bnb.token.new.connect} component={BNBTokenNewConnect} />

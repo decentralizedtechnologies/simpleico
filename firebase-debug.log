@@ -1,0 +1,30 @@
+[debug] [2020-01-10T04:29:12.621Z] ----------------------------------------------------------------------
+[debug] [2020-01-10T04:29:12.625Z] Command:       /root/.nvm/versions/node/v12.13.0/bin/node /root/.nvm/versions/node/v12.13.0/bin/firebase deploy
+[debug] [2020-01-10T04:29:12.625Z] CLI Version:   7.11.0
+[debug] [2020-01-10T04:29:12.625Z] Platform:      linux
+[debug] [2020-01-10T04:29:12.625Z] Node Version:  v12.13.0
+[debug] [2020-01-10T04:29:12.631Z] Time:          Thu Jan 09 2020 22:29:12 GMT-0600 (Central Standard Time)
+[debug] [2020-01-10T04:29:12.631Z] ----------------------------------------------------------------------
+[debug] [2020-01-10T04:29:12.631Z] 
+[debug] [2020-01-10T04:29:12.646Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-01-10T04:29:12.646Z] > authorizing via signed-in user
+[debug] [2020-01-10T04:29:12.646Z] [iam] checking project simpleico-prod for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2020-01-10T04:29:12.648Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2020-01-10T04:29:12.649Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2020-01-10T04:29:12.815Z] <<< HTTP RESPONSE 200
+[debug] [2020-01-10T04:29:12.822Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/simpleico-prod:testIamPermissions  
+
+[debug] [2020-01-10T04:29:12.991Z] <<< HTTP RESPONSE 200
+[debug] [2020-01-10T04:29:12.996Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/simpleico-prod  
+ 
+[debug] [2020-01-10T04:29:13.224Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'simpleico-prod'...
+[info] 
+[info] i  deploying hosting
+[debug] [2020-01-10T04:29:13.239Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/simpleico-prod/versions  
+
+[debug] [2020-01-10T04:29:14.740Z] <<< HTTP RESPONSE 200
+[info] i  hosting[simpleico-prod]: beginning deploy...
+[info] i  hosting[simpleico-prod]: found 22 files in build

@@ -1,4 +1,14 @@
-import { Box, Button, Container, Grid, Paper, TextField, Theme, Typography, withStyles } from "@material-ui/core";
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  Paper,
+  TextField,
+  Theme,
+  Typography,
+  withStyles,
+} from "@material-ui/core";
 import React from "react";
 import { RouteComponentProps } from "react-router";
 import { SidebarNavigation } from ".";
@@ -127,12 +137,11 @@ export const Params = withStyles((theme: Theme) => ({}))(
                     <Grid item lg={6}>
                       <Box>
                         <Typography variant="body2">
-                          The initial supply of your token if mintable or maximum supply otherwise.
-                          This is up to you, but it commonly represents the amount of shares your
-                          company is selling, or a fraction of it. It can also represent only 1
-                          object, like a car, and its price would be the actual value of the vehicle
-                          determined by the market. The max total supply is 90 billion. Our
-                          professional services can help you determine the correct supply.
+                          The total supply of your token. This is up to you, but it commonly
+                          represents the amount of shares your company is selling, or a fraction of
+                          it. It can also represent only 1 object, like a car, and its price would
+                          be the actual value of the vehicle determined by the market. For Ethereum,
+                          the maximum amount of decimals is 1e18. eg. 1000000000000000000
                         </Typography>
                       </Box>
                     </Grid>
@@ -146,7 +155,7 @@ export const Params = withStyles((theme: Theme) => ({}))(
                         <TextField
                           fullWidth
                           label="Supply"
-                          placeholder="eg. 1000"
+                          placeholder="eg. 1000000000000000000"
                           onChange={onSetSupply}
                           value={supply}
                         />

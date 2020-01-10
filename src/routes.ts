@@ -1,6 +1,6 @@
 export const routes = {
-  // root: "/",
-  root: "/eth/erc20/new/params",
+  root: "/",
+  // root: "/eth/erc20/new/params",
   home: {},
   eth: {
     erc20: {

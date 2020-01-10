@@ -62,8 +62,25 @@ export const getExplorerURI = (network: Networks): string => {
   return explorers[network];
 };
 
-export const getClient = async (network: Networks): Promise<Web3> =>
+export const setClientProviderByNetwork = (client: Web3, network: Networks = "mainnet"): Web3 => {
+  const web3 = (window as any).web3;
+  const provider = new Web3.providers.HttpProvider(getNetworkURI(network));
+  (window as any).web3.setProvider(provider);
+  client.setProvider(web3.currentProvider);
+  return client;
+};
+
+export const getClient = async (network: Networks = "mainnet"): Promise<Web3> =>
   new Promise((resolve, reject) => {
-    const client = new Web3(getNetworkURI(network));
+    const ethereum = (window as any).ethereum;
+    const web3 = (window as any).web3;
+    let client;
+    if (typeof ethereum !== "undefined") {
+      client = new Web3(ethereum);
+    } else if (typeof web3 !== "undefined") {
+      client = new Web3(web3.currentProvider);
+    } else {
+      client = new Web3(getNetworkURI(network));
+    }
     resolve(client);
   });

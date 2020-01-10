@@ -16,7 +16,6 @@ import { History } from "history";
 import React from "react";
 import { RouteComponentProps } from "react-router";
 import { Link } from "react-router-dom";
-import Web3 from "web3";
 import { TransactionReceipt } from "web3-core";
 import { SidebarNavigation } from ".";
 import { StepsSidebar, ToolbarPadding } from "../../../components";
@@ -27,12 +26,12 @@ import {
   enableEthereumWallet,
   ERC20,
   getClient,
-  getNetworkURI,
   isEthereumEnabled,
   isWeb3Compatible,
   networkNameByVersion,
   Networks,
   networks,
+  setClientProviderByNetwork,
 } from "../../client";
 import { SidebarFooter } from "../../components";
 
@@ -62,7 +61,7 @@ export const Create = withStyles((theme: Theme) => ({
 
   React.useEffect(() => {
     getAddress();
-  }, []);
+  }, [isWalletEnabled]);
 
   const onEnableEthereumClient = async () => {
     await enableEthereumWallet();
@@ -77,11 +76,7 @@ export const Create = withStyles((theme: Theme) => ({
       const name = ls.get("eth", "erc20.name");
       const symbol = ls.get("eth", "erc20.symbol");
       const supply = Number(ls.get("eth", "erc20.supply"));
-      const web3 = (window as any).web3;
-      const client = await getClient(network);
-      web3.setProvider(new Web3.providers.HttpProvider(getNetworkURI(network)));
-      const web3Provider = web3.currentProvider;
-      client.setProvider(web3Provider);
+      const client = setClientProviderByNetwork(await getClient(network), network);
       const txObject = await ERC20.deploy(client)(name, symbol, supply, 18);
       const res = await txObject
         .send({ from: address })
@@ -108,19 +103,18 @@ export const Create = withStyles((theme: Theme) => ({
 
       setIsGettingAccount(true);
       setAddress("");
-      // wait for selectedAddress to be set sync
-      setTimeout(async () => {
-        const version = (window as any).web3.currentProvider.networkVersion;
-        const _network = networkNameByVersion[version];
-        setNetwork(_network);
-        const client = await getClient(_network);
-        console.log(client);
-        const _address = client.givenProvider.selectedAddress;
-        const _balance = await client.eth.getBalance(_address);
-        setAddress(_address);
-        setBalance(client.utils.fromWei(_balance, "ether"));
-        setIsGettingAccount(false);
-      }, 1500);
+
+      let client = await getClient();
+      const version = await client.eth.net.getId();
+      const _network = networkNameByVersion[version];
+      setNetwork(_network);
+      client = setClientProviderByNetwork(client, _network);
+      console.log(client);
+      const _address = (await (window as any).ethereum.enable())[0];
+      const _balance = await client.eth.getBalance(_address);
+      setAddress(_address);
+      setBalance(client.utils.fromWei(_balance, "ether"));
+      setIsGettingAccount(false);
     } catch (error) {
       console.error(error);
       setAddress("");
@@ -187,9 +181,9 @@ export const Create = withStyles((theme: Theme) => ({
                   <Typography gutterBottom variant="body2">
                     You need to install a{" "}
                     <a href="https://metamask.io/" target="_blank" rel="nofollow">
-                      Web3 compatible browser extension like metamask
+                      Web3 compatible browser extension
                     </a>{" "}
-                    or open SimpleICO.com in a{" "}
+                    like metamask or open SimpleICO.com in a{" "}
                     <a href="https://www.opera.com/crypto" target="_blank" rel="nofollow">
                       browser that supports Web3
                     </a>
