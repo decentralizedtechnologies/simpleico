@@ -2,8 +2,8 @@ import { Box, Theme, Typography } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
 import React from "react";
 import { RouteComponentProps } from "react-router-dom";
-import { routes } from "../../../routes";
-import { styles } from "../../../theme";
+import { routes } from "../../../../routes";
+import { styles } from "../../../../theme";
 
 export const drawerWidth = 420;
 

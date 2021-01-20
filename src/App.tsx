@@ -5,18 +5,18 @@ import {
   Create as BNBTokenNewCreate,
   Finish as BNBTokenNewFinish,
   Params as BNBTokenNewParams,
-} from "./bnb/token/new";
-import { Select as BNBTokenToolsSelect } from "./bnb/token/tools";
+} from "./chain/bnb/token/new";
+import { Select as BNBTokenToolsSelect } from "./chain/bnb/token/tools";
 import {
   Connect as BNBTokenToolsMintConnect,
   Finish as BNBTokenToolsMintFinish,
   Params as BNBTokenToolsMintParams,
-} from "./bnb/token/tools/mint";
+} from "./chain/bnb/token/tools/mint";
 import {
   Create as ETH_ERC20NewCreate,
   Finish as ETH_ERC20NewFinish,
   Params as ETH_ERC20NewParams,
-} from "./eth/erc20/new";
+} from "./chain/eth/erc20/new";
 import { routes } from "./routes";
 
 const App: React.FC = () => (

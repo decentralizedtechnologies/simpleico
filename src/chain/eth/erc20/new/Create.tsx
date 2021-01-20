@@ -18,10 +18,10 @@ import { RouteComponentProps } from "react-router";
 import { Link } from "react-router-dom";
 import { TransactionReceipt } from "web3-core";
 import { SidebarNavigation } from ".";
-import { StepsSidebar, ToolbarPadding } from "../../../components";
-import routes from "../../../routes";
-import { styles } from "../../../theme";
-import ls from "../../../utils/ls";
+import { StepsSidebar, ToolbarPadding } from "../../../../components";
+import routes from "../../../../routes";
+import { styles } from "../../../../theme";
+import ls from "../../../../utils/ls";
 import {
   enableEthereumWallet,
   ERC20,

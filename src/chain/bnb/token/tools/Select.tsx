@@ -12,9 +12,9 @@ import {
 } from "@material-ui/core";
 import React from "react";
 import { RouteComponentProps } from "react-router";
-import { StepsSidebar, ToolbarPadding } from "../../../components";
-import routes from "../../../routes";
-import { styles } from "../../../theme";
+import { StepsSidebar, ToolbarPadding } from "../../../../components";
+import routes from "../../../../routes";
+import { styles } from "../../../../theme";
 import { SidebarFooter } from "../../components";
 import { SidebarNavigation } from "./SidebarNavigation";
 

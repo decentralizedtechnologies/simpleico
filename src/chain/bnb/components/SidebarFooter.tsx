@@ -3,7 +3,7 @@ import GitHubIcon from "@material-ui/icons/GitHub";
 import { withStyles } from "@material-ui/styles";
 import React from "react";
 import { Link, RouteComponentProps } from "react-router-dom";
-import { routes } from "../../routes";
+import { routes } from "../../../routes";
 
 export const drawerWidth = 420;
 

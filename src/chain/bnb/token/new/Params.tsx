@@ -1,10 +1,22 @@
-import { Box, Button, Checkbox, Container, FormControlLabel, Grid, Paper, TextField, Theme, Typography, withStyles } from "@material-ui/core";
+import {
+  Box,
+  Button,
+  Checkbox,
+  Container,
+  FormControlLabel,
+  Grid,
+  Paper,
+  TextField,
+  Theme,
+  Typography,
+  withStyles,
+} from "@material-ui/core";
 import React from "react";
 import { RouteComponentProps } from "react-router";
 import { SidebarNavigation } from ".";
-import { StepsSidebar, ToolbarPadding } from "../../../components";
-import routes from "../../../routes";
-import ls from "../../../utils/ls";
+import { StepsSidebar, ToolbarPadding } from "../../../../components";
+import routes from "../../../../routes";
+import ls from "../../../../utils/ls";
 import { SidebarFooter } from "../../components";
 
 interface IParams extends RouteComponentProps<{ id: string }> {
@@ -136,10 +148,12 @@ export const Params = withStyles((theme: Theme) => ({}))(
                     <Grid item lg={6}>
                       <Box>
                         <Typography variant="body2">
-                          The initial supply of your token if mintable or maximum supply otherwise. This is up to you, but it commonly
-                          represents the amount of shares your company is selling, or a fraction of
-                          it. It can also represent only 1 object, like a car, and its price would
-                          be the actual value of the vehicle determined by the market. The max total supply is 90 billion. Our professional services can help you determine the correct supply.
+                          The initial supply of your token if mintable or maximum supply otherwise.
+                          This is up to you, but it commonly represents the amount of shares your
+                          company is selling, or a fraction of it. It can also represent only 1
+                          object, like a car, and its price would be the actual value of the vehicle
+                          determined by the market. The max total supply is 90 billion. Our
+                          professional services can help you determine the correct supply.
                         </Typography>
                       </Box>
                     </Grid>

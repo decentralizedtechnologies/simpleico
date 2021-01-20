@@ -1,8 +1,8 @@
 import { Box, Container, Paper, Theme, Typography, withStyles } from "@material-ui/core";
 import React from "react";
 import { RouteComponentProps } from "react-router";
-import { StepsSidebar, ToolbarPadding } from "../../../../components";
-import routes from "../../../../routes";
+import { StepsSidebar, ToolbarPadding } from "../../../../../components";
+import routes from "../../../../../routes";
 import { ConnectWalletWidget, SidebarFooter } from "../../../components";
 import { SidebarNavigation } from "./SidebarNavigation";
 
@@ -35,7 +35,13 @@ export const Connect = withStyles((theme: Theme) => ({}))(
             <Paper elevation={1}>
               <Box p={2}>
                 <Typography gutterBottom>Step 1 · Connect your Binance Chain wallet</Typography>
-                <ConnectWalletWidget onNext={onNext} onBack={onBack} onNextWithKeystoreFile={onNextWithKeystoreFile} history={history} {...props} />
+                <ConnectWalletWidget
+                  onNext={onNext}
+                  onBack={onBack}
+                  onNextWithKeystoreFile={onNextWithKeystoreFile}
+                  history={history}
+                  {...props}
+                />
               </Box>
             </Paper>
           </Box>

@@ -22,40 +22,40 @@ export const SidebarNavigation = withStyles((theme: Theme) => ({
   return (
     <Box px={3}>
       <Box mb={4}>
-        <Box width={140}>
-          <img src="/svg/logo-binance-dex.svg" width="100%" height="auto" />
+        <Box width={140} mb={1}>
+          <img src="/svg/logo-ethereum-white-horizontal.svg" width="100%" height="auto" />
         </Box>
-        <Typography style={{ color: "white" }}>BEP2 Token Tools · Mint</Typography>
+        <Typography style={{ color: "white" }}>ERC20 Token Tools · Create</Typography>
       </Box>
       <Box mb={2}>
         <Link
-          to={routes.bnb.token.tools.mint.connect}
+          to={routes.eth.erc20.new.params}
           className={
-            isSelected(routes.bnb.token.tools.mint.connect)
+            isSelected(routes.eth.erc20.new.params)
               ? `${classes.sidebarNavigationSelectedLink} ${classes.sidebarNavigationLink}`
               : classes.sidebarNavigationLink
           }
         >
-          <Typography variant="body2">Connect</Typography>
+          <Typography variant="body2">Params</Typography>
         </Link>
       </Box>
       <Box mb={2}>
         <Link
-          to={routes.bnb.token.tools.mint.params}
+          to={routes.eth.erc20.new.create}
           className={
-            isSelected(routes.bnb.token.tools.mint.params)
+            isSelected(routes.eth.erc20.new.create)
               ? `${classes.sidebarNavigationSelectedLink} ${classes.sidebarNavigationLink}`
               : classes.sidebarNavigationLink
           }
         >
-          <Typography variant="body2">Amount</Typography>
+          <Typography variant="body2">Create</Typography>
         </Link>
       </Box>
       <Box>
         <Typography
           variant="body2"
           className={
-            isSelected(routes.bnb.token.tools.mint.finish)
+            isSelected(routes.eth.erc20.new.finish)
               ? `${classes.sidebarNavigationSelectedLink} ${classes.sidebarNavigationLink}`
               : classes.sidebarNavigationLink
           }

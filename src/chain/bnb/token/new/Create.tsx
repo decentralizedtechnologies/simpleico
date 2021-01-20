@@ -1,5 +1,18 @@
 import { crypto } from "@binance-chain/javascript-sdk";
-import { Backdrop, Box, Button, Container, FormControlLabel, Grid, Paper, Switch, TextField, Theme, Typography, withStyles } from "@material-ui/core";
+import {
+  Backdrop,
+  Box,
+  Button,
+  Container,
+  FormControlLabel,
+  Grid,
+  Paper,
+  Switch,
+  TextField,
+  Theme,
+  Typography,
+  withStyles,
+} from "@material-ui/core";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import CancelOutlinedIcon from "@material-ui/icons/CancelOutlined";
 import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
@@ -8,11 +21,11 @@ import React from "react";
 import { RouteComponentProps } from "react-router";
 import { Link } from "react-router-dom";
 import { SidebarNavigation } from ".";
-import { StepsSidebar, ToolbarPadding } from "../../../components";
-import routes from "../../../routes";
-import { styles } from "../../../theme";
-import ls from "../../../utils/ls";
-import ss from "../../../utils/ss";
+import { StepsSidebar, ToolbarPadding } from "../../../../components";
+import routes from "../../../../routes";
+import { styles } from "../../../../theme";
+import ls from "../../../../utils/ls";
+import ss from "../../../../utils/ss";
 import { getClient, networks } from "../../client";
 import token from "../../client/token";
 import { SidebarFooter } from "../../components";

@@ -13,8 +13,8 @@ import {
 } from "@material-ui/core";
 import React from "react";
 import { RouteComponentProps } from "react-router";
-import { Dropzone } from "../../components";
-import ss from "../../utils/ss";
+import { Dropzone } from "../../../components";
+import ss from "../../../utils/ss";
 
 interface IConnectWalletWidget extends RouteComponentProps<{ id: string }> {
   classes: any;

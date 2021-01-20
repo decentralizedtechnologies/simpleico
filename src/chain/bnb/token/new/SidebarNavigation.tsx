@@ -2,8 +2,8 @@ import { Box, Theme, Typography } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
 import React from "react";
 import { Link, RouteComponentProps } from "react-router-dom";
-import { routes } from "../../../routes";
-import { styles } from "../../../theme";
+import { routes } from "../../../../routes";
+import { styles } from "../../../../theme";
 
 export const drawerWidth = 420;
 
@@ -21,17 +21,14 @@ export const SidebarNavigation = withStyles((theme: Theme) => ({
 
   return (
     <Box px={3}>
-      <Box mb={4}>
-        <Box width={140} mb={1}>
-          <img src="/svg/logo-ethereum-white-horizontal.svg" width="100%" height="auto" />
-        </Box>
-        <Typography style={{ color: "white" }}>ERC20 Token Tools · Create</Typography>
+      <Box width={140} mb={4}>
+        <img src="/svg/logo-binance-dex.svg" width="100%" height="auto" />
       </Box>
       <Box mb={2}>
         <Link
-          to={routes.eth.erc20.new.params}
+          to={routes.bnb.token.new.params}
           className={
-            isSelected(routes.eth.erc20.new.params)
+            isSelected(routes.bnb.token.new.params)
               ? `${classes.sidebarNavigationSelectedLink} ${classes.sidebarNavigationLink}`
               : classes.sidebarNavigationLink
           }
@@ -41,9 +38,21 @@ export const SidebarNavigation = withStyles((theme: Theme) => ({
       </Box>
       <Box mb={2}>
         <Link
-          to={routes.eth.erc20.new.create}
+          to={routes.bnb.token.new.connect}
           className={
-            isSelected(routes.eth.erc20.new.create)
+            isSelected(routes.bnb.token.new.connect)
+              ? `${classes.sidebarNavigationSelectedLink} ${classes.sidebarNavigationLink}`
+              : classes.sidebarNavigationLink
+          }
+        >
+          <Typography variant="body2">Connect</Typography>
+        </Link>
+      </Box>
+      <Box mb={2}>
+        <Link
+          to={routes.bnb.token.new.create}
+          className={
+            isSelected(routes.bnb.token.new.create)
               ? `${classes.sidebarNavigationSelectedLink} ${classes.sidebarNavigationLink}`
               : classes.sidebarNavigationLink
           }
@@ -55,7 +64,7 @@ export const SidebarNavigation = withStyles((theme: Theme) => ({
         <Typography
           variant="body2"
           className={
-            isSelected(routes.eth.erc20.new.finish)
+            isSelected(routes.bnb.token.new.finish)
               ? `${classes.sidebarNavigationSelectedLink} ${classes.sidebarNavigationLink}`
               : classes.sidebarNavigationLink
           }

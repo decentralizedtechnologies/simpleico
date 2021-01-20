@@ -1,14 +1,32 @@
 import { crypto } from "@binance-chain/javascript-sdk";
-import { Backdrop, Box, Button, Card, CardActions, CardContent, Container, Fade, FormControlLabel, Grid, Modal, Paper, Switch, TextField, Theme, Typography, withStyles } from "@material-ui/core";
+import {
+  Backdrop,
+  Box,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  Container,
+  Fade,
+  FormControlLabel,
+  Grid,
+  Modal,
+  Paper,
+  Switch,
+  TextField,
+  Theme,
+  Typography,
+  withStyles,
+} from "@material-ui/core";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import React from "react";
 import { RouteComponentProps } from "react-router";
 import { Link } from "react-router-dom";
 import { SidebarNavigation } from ".";
-import { StepsSidebar, ToolbarPadding } from "../../../../components";
-import routes from "../../../../routes";
-import { styles } from "../../../../theme";
-import { ls, ss } from "../../../../utils";
+import { StepsSidebar, ToolbarPadding } from "../../../../../components";
+import routes from "../../../../../routes";
+import { styles } from "../../../../../theme";
+import { ls, ss } from "../../../../../utils";
 import { getClient, networks } from "../../../client";
 import token from "../../../client/token";
 import { SidebarFooter } from "../../../components";
@@ -111,7 +129,13 @@ export const Params = withStyles((theme: Theme) => ({
           <Box maxWidth="25vw" minWidth="25vw">
             <Card>
               <CardContent>
-                <TextField type="password" label="Type your wallet password" autoFocus fullWidth inputRef={passwordRef} />
+                <TextField
+                  type="password"
+                  label="Type your wallet password"
+                  autoFocus
+                  fullWidth
+                  inputRef={passwordRef}
+                />
               </CardContent>
               <CardActions>
                 <Button
@@ -122,7 +146,9 @@ export const Params = withStyles((theme: Theme) => ({
                   Cancel
                 </Button>
                 <Button
-                  onClick={() => {onMint();}}
+                  onClick={() => {
+                    onMint();
+                  }}
                   color="primary"
                   variant="contained"
                   style={{ marginLeft: "auto" }}

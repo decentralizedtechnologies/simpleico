@@ -12,9 +12,9 @@ import {
 import React from "react";
 import { RouteComponentProps } from "react-router";
 import { SidebarNavigation } from ".";
-import { StepsSidebar, ToolbarPadding } from "../../../components";
-import routes from "../../../routes";
-import ls from "../../../utils/ls";
+import { StepsSidebar, ToolbarPadding } from "../../../../components";
+import routes from "../../../../routes";
+import ls from "../../../../utils/ls";
 import { SidebarFooter } from "../../components";
 
 interface IParams extends RouteComponentProps<{ id: string }> {

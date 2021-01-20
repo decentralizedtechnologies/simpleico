@@ -3,10 +3,10 @@ import React from "react";
 import { RouteComponentProps } from "react-router";
 import { Link } from "react-router-dom";
 import { SidebarNavigation } from ".";
-import { StepsSidebar, ToolbarPadding } from "../../../../components";
-import routes from "../../../../routes";
-import { styles } from "../../../../theme";
-import { ls, ss } from "../../../../utils";
+import { StepsSidebar, ToolbarPadding } from "../../../../../components";
+import routes from "../../../../../routes";
+import { styles } from "../../../../../theme";
+import { ls, ss } from "../../../../../utils";
 import { explorers, networks } from "../../../client";
 import { SidebarFooter } from "../../../components";
 
