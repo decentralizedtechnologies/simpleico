@@ -2,6 +2,16 @@ export const routes = {
   root: "/",
   // root: "/eth/erc20/new/params",
   home: {},
+  polkadot: {
+    erc20: {
+      new: {
+        params: "/polkadot/erc20/new/params",
+        connect: "/polkadot/erc20/new/connect",
+        create: "/polkadot/erc20/new/create",
+        finish: "/polkadot/erc20/new/finish",
+      },
+    },
+  },
   eth: {
     erc20: {
       new: {

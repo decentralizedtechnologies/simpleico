@@ -17,6 +17,7 @@ import {
   Finish as ETH_ERC20NewFinish,
   Params as ETH_ERC20NewParams,
 } from "./chain/eth/erc20/new";
+import { Routes as DOTRoutes } from "./chain/polkadot/context";
 import { routes } from "./routes";
 
 const App: React.FC = () => (
@@ -37,6 +38,9 @@ const App: React.FC = () => (
     <Route path={routes.eth.erc20.new.params} component={ETH_ERC20NewParams} />
     <Route path={routes.eth.erc20.new.create} component={ETH_ERC20NewCreate} />
     <Route path={routes.eth.erc20.new.finish} component={ETH_ERC20NewFinish} />
+
+    {/* Polkadot */}
+    <DOTRoutes />
   </Router>
 );
 
