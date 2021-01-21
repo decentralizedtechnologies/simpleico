@@ -15,7 +15,6 @@ import { StepsSidebar, ToolbarPadding } from "../../../../components";
 import routes from "../../../../routes";
 import { styles } from "../../../../theme";
 import { ls } from "../../../../utils";
-import { networks } from "../../client";
 import { SidebarFooter } from "../../components";
 import { NAMESPACE } from "../../constants";
 import { DependencyContext } from "../../context";
@@ -24,12 +23,7 @@ import { ERC20ContractModel, PolkadotClient } from "../../model";
 interface Props extends WithStyles, RouteComponentProps<{ id: string }> {}
 
 const Component: React.FC<Props> = ({ classes, history, ...props }) => {
-  const [receipt] = React.useState(ls.get(NAMESPACE, "erc20.receipt"));
-  const [name] = React.useState(ls.get(NAMESPACE, "erc20.name"));
-  const [symbol] = React.useState(ls.get(NAMESPACE, "erc20.symbol"));
-  const [supply] = React.useState(ls.get(NAMESPACE, "erc20.supply"));
   const [transactionHash] = React.useState(ls.get(NAMESPACE, "erc20.receipt.transactionHash", ""));
-  const [network] = React.useState(ls.get(NAMESPACE, "erc20.network", networks.testnet));
 
   const container = React.useContext(DependencyContext);
   const ERC20Contract = container.get<ERC20ContractModel>(ERC20ContractModel.type);
