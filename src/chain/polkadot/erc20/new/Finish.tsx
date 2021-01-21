@@ -37,7 +37,11 @@ const Component: React.FC<Props> = ({ classes, history, ...props }) => {
 
   return (
     <Box display="flex">
-      <StepsSidebar footer={<SidebarFooter history={history} {...props} />}>
+      <StepsSidebar
+        footer={<SidebarFooter history={history} {...props} />}
+        history={history}
+        {...props}
+      >
         <SidebarNavigation history={history} {...props} />
       </StepsSidebar>
       <Container maxWidth="xl">

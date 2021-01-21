@@ -66,7 +66,11 @@ const Component: React.FC<Props> = ({ classes, history, ...props }) => {
       <Backdrop className={classes.backdrop} open={isIssuingToken}>
         <CircularProgress color="inherit" />
       </Backdrop>
-      <StepsSidebar footer={<SidebarFooter history={history} {...props} />}>
+      <StepsSidebar
+        footer={<SidebarFooter history={history} {...props} />}
+        history={history}
+        {...props}
+      >
         <SidebarNavigation history={history} {...props} />
       </StepsSidebar>
       <Container maxWidth="xl">

@@ -1,6 +1,5 @@
 export const routes = {
   root: "/",
-  // root: "/eth/erc20/new/params",
   home: {},
   polkadot: {
     erc20: {

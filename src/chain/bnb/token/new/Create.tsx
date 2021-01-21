@@ -122,7 +122,11 @@ export const Create = withStyles((theme: Theme) => ({
       <Backdrop className={classes.backdrop} open={isIssuingToken}>
         <CircularProgress color="inherit" />
       </Backdrop>
-      <StepsSidebar footer={<SidebarFooter history={history} {...props} />}>
+      <StepsSidebar
+        footer={<SidebarFooter history={history} {...props} />}
+        history={history}
+        {...props}
+      >
         <SidebarNavigation history={history} {...props} />
       </StepsSidebar>
       <Container maxWidth="xl">

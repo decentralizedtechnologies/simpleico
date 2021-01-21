@@ -160,7 +160,11 @@ export const Params = withStyles((theme: Theme) => ({
           </Box>
         </Fade>
       </Modal>
-      <StepsSidebar footer={<SidebarFooter history={history} {...props} />}>
+      <StepsSidebar
+        footer={<SidebarFooter history={history} {...props} />}
+        history={history}
+        {...props}
+      >
         <SidebarNavigation history={history} {...props} />
       </StepsSidebar>
       <Container maxWidth="xl">

@@ -35,7 +35,11 @@ export const Select = withStyles((theme: Theme) => ({
 }))(({ classes, history, ...props }: ISelect) => {
   return (
     <Box display="flex">
-      <StepsSidebar footer={<SidebarFooter history={history} {...props} />}>
+      <StepsSidebar
+        footer={<SidebarFooter history={history} {...props} />}
+        history={history}
+        {...props}
+      >
         <SidebarNavigation history={history} {...props} />
       </StepsSidebar>
       <Container maxWidth="xl">

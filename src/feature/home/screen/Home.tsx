@@ -2,7 +2,6 @@ import {
   Box,
   Card,
   CardContent,
-  CardHeader,
   Container,
   Grid,
   Paper,
@@ -16,14 +15,14 @@ import { RouteComponentProps } from "react-router-dom";
 import { StepsSidebar, ToolbarPadding } from "../../../components";
 import routes from "../../../routes";
 import { styles } from "../../../theme";
-import { SidebarNavigation } from "../component";
+import { SidebarFooter, SidebarNavigation } from "../component";
 
 interface Props extends WithStyles, RouteComponentProps {}
 
 const Component: React.FC<Props> = ({ classes, history, ...props }) => {
   return (
     <Box display="flex">
-      <StepsSidebar>
+      <StepsSidebar footer={<SidebarFooter />} history={history} {...props}>
         <SidebarNavigation history={history} {...props} />
       </StepsSidebar>
       <Container maxWidth="xl">
@@ -31,11 +30,11 @@ const Component: React.FC<Props> = ({ classes, history, ...props }) => {
         <Box mb={4}>
           <Paper elevation={1}>
             <Box p={2}>
-              <Typography variant="body2" gutterBottom>
-                BEP2 token tools
+              <Typography variant="h4" gutterBottom>
+                Simple Smart Contract tools
               </Typography>
               <Typography variant="body2">
-                Select an option, connect your wallet and run the desired BEP2 token function.
+                Select a chain below and deploy smart contracts, easily.
               </Typography>
             </Box>
           </Paper>
@@ -49,9 +48,11 @@ const Component: React.FC<Props> = ({ classes, history, ...props }) => {
                   history.push(routes.bnb.token.new.params);
                 }}
               >
-                <CardHeader title="Issue" />
+                <Box className={classes.media}>
+                  <img src="/svg/logo-binance-dex.svg" width="100%" height="auto" />
+                </Box>
                 <CardContent className={classes.cardContent}>
-                  Create a new BEP2 asset on Binance Chain.
+                  Create a new BEP2 asset on the Binance Chain.
                 </CardContent>
               </Card>
             </Grid>
@@ -59,25 +60,14 @@ const Component: React.FC<Props> = ({ classes, history, ...props }) => {
               <Card
                 className={classes.card}
                 onClick={() => {
-                  history.push(routes.bnb.token.tools.mint.connect);
+                  history.push(routes.eth.erc20.new.params);
                 }}
               >
-                <CardHeader title="Mint" />
+                <Box className={classes.media}>
+                  <img src="/eth/logo-ethereum-black-horizontal.png" width="100%" height="auto" />
+                </Box>
                 <CardContent className={classes.cardContent}>
-                  Increase the supply of a mintable BEP2 token.
-                </CardContent>
-              </Card>
-            </Grid>
-            {/* <Grid item lg={4}>
-              <Card
-                className={classes.card}
-                onClick={() => {
-                  history.push(routes.bnb.token.tools.mint.params);
-                }}
-              >
-                <CardHeader title="Burn" />
-                <CardContent className={classes.cardContent}>
-                  Decrease the supply of a mintable BEP2 token.
+                  Create a new ERC20 token on the Ethereum Chain.
                 </CardContent>
               </Card>
             </Grid>
@@ -85,63 +75,17 @@ const Component: React.FC<Props> = ({ classes, history, ...props }) => {
               <Card
                 className={classes.card}
                 onClick={() => {
-                  history.push(routes.bnb.token.tools.mint.params);
+                  history.push(routes.polkadot.erc20.new.params);
                 }}
               >
-                <CardHeader title="Freeze" />
+                <Box className={classes.media}>
+                  <img src="/polkadot/logo-polkadot.png" width="100%" height="auto" />
+                </Box>
                 <CardContent className={classes.cardContent}>
-                  Freeze some amount of token.
+                  Create a new ERC20 token on the Polkadot Chain.
                 </CardContent>
               </Card>
             </Grid>
-            <Grid item lg={4}>
-              <Card
-                className={classes.card}
-                onClick={() => {
-                  history.push(routes.bnb.token.tools.mint.params);
-                }}
-              >
-                <CardHeader title="Unfreeze" />
-                <CardContent className={classes.cardContent}>
-                  Unfreeze some amount of token.
-                </CardContent>
-              </Card>
-            </Grid>
-            <Grid item lg={4}>
-              <Card
-                className={classes.card}
-                onClick={() => {
-                  history.push(routes.bnb.token.tools.mint.params);
-                }}
-              >
-                <CardHeader title="Timelock" />
-                <CardContent className={classes.cardContent}>Lock token for a while.</CardContent>
-              </Card>
-            </Grid>
-            <Grid item lg={4}>
-              <Card
-                className={classes.card}
-                onClick={() => {
-                  history.push(routes.bnb.token.tools.mint.params);
-                }}
-              >
-                <CardHeader title="Time unlock" />
-                <CardContent className={classes.cardContent}>Unlock locked tokens.</CardContent>
-              </Card>
-            </Grid>
-            <Grid item lg={4}>
-              <Card
-                className={classes.card}
-                onClick={() => {
-                  history.push(routes.bnb.token.tools.mint.params);
-                }}
-              >
-                <CardHeader title="Time relock" />
-                <CardContent className={classes.cardContent}>
-                  Lock more token or increase locked period.
-                </CardContent>
-              </Card>
-            </Grid> */}
           </Grid>
         </Box>
       </Container>
@@ -154,6 +98,18 @@ export const Home = withStyles((theme: Theme) => ({
   card: {
     "&:hover": {
       cursor: "pointer",
+    },
+  },
+  media: {
+    height: 156,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: theme.spacing(2),
+    "& img": {
+      width: "100%",
+      height: "auto",
     },
   },
   cardContent: {

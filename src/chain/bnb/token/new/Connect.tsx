@@ -7,7 +7,7 @@ import routes from "../../../../routes";
 import ls from "../../../../utils/ls";
 import { ConnectWalletWidget, SidebarFooter } from "../../components";
 
-interface IConnect extends RouteComponentProps<{ id: string }> {
+interface IConnect extends RouteComponentProps {
   classes: any;
 }
 
@@ -27,7 +27,11 @@ export const Connect = withStyles((theme: Theme) => ({}))(
 
     return (
       <Box display="flex">
-        <StepsSidebar footer={<SidebarFooter history={history} {...props} />}>
+        <StepsSidebar
+          footer={<SidebarFooter history={history} {...props} />}
+          history={history}
+          {...props}
+        >
           <SidebarNavigation history={history} {...props} />
         </StepsSidebar>
         <Container maxWidth="xl">

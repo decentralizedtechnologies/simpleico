@@ -1,4 +1,4 @@
-import { Box, Theme, Typography } from "@material-ui/core";
+import { Box, Theme, Typography, WithStyles } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
 import React from "react";
 import { Link, RouteComponentProps } from "react-router-dom";
@@ -7,7 +7,7 @@ import { styles } from "../../../../theme";
 
 export const drawerWidth = 420;
 
-interface ISidebarNavigationProps extends RouteComponentProps<{ id: string }> {
+interface ISidebarNavigationProps extends WithStyles, RouteComponentProps {
   classes: any;
 }
 

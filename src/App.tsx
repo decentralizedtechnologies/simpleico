@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import {
   Connect as BNBTokenNewConnect,
   Create as BNBTokenNewCreate,
@@ -18,29 +18,37 @@ import {
   Params as ETH_ERC20NewParams,
 } from "./chain/eth/erc20/new";
 import { Routes as DOTRoutes } from "./chain/polkadot/context";
+import { Home } from "./feature/home/screen";
 import { routes } from "./routes";
 
 const App: React.FC = () => (
   <Router>
-    <Route path={routes.root} exact component={ETH_ERC20NewParams} />
-    {/* Binance Chain */}
-    <Route path={routes.bnb.token.new.params} component={BNBTokenNewParams} />
-    <Route path={routes.bnb.token.new.connect} component={BNBTokenNewConnect} />
-    <Route path={routes.bnb.token.new.create} component={BNBTokenNewCreate} />
-    <Route path={routes.bnb.token.new.finish} component={BNBTokenNewFinish} />
+    <Switch>
+      <Route path={routes.root} exact strict component={Home} />
 
-    <Route path={routes.bnb.token.tools.select} component={BNBTokenToolsSelect} />
-    <Route path={routes.bnb.token.tools.mint.connect} component={BNBTokenToolsMintConnect} />
-    <Route path={routes.bnb.token.tools.mint.params} component={BNBTokenToolsMintParams} />
-    <Route path={routes.bnb.token.tools.mint.finish} component={BNBTokenToolsMintFinish} />
+      {/* Binance Chain */}
+      <Route exact path={routes.bnb.token.new.params} component={BNBTokenNewParams} />
+      <Route exact path={routes.bnb.token.new.connect} component={BNBTokenNewConnect} />
+      <Route exact path={routes.bnb.token.new.create} component={BNBTokenNewCreate} />
+      <Route exact path={routes.bnb.token.new.finish} component={BNBTokenNewFinish} />
 
-    {/* Ethereum */}
-    <Route path={routes.eth.erc20.new.params} component={ETH_ERC20NewParams} />
-    <Route path={routes.eth.erc20.new.create} component={ETH_ERC20NewCreate} />
-    <Route path={routes.eth.erc20.new.finish} component={ETH_ERC20NewFinish} />
+      <Route exact path={routes.bnb.token.tools.select} component={BNBTokenToolsSelect} />
+      <Route
+        exact
+        path={routes.bnb.token.tools.mint.connect}
+        component={BNBTokenToolsMintConnect}
+      />
+      <Route exact path={routes.bnb.token.tools.mint.params} component={BNBTokenToolsMintParams} />
+      <Route exact path={routes.bnb.token.tools.mint.finish} component={BNBTokenToolsMintFinish} />
 
-    {/* Polkadot */}
-    <DOTRoutes />
+      {/* Ethereum */}
+      <Route exact path={routes.eth.erc20.new.params} component={ETH_ERC20NewParams} />
+      <Route exact path={routes.eth.erc20.new.create} component={ETH_ERC20NewCreate} />
+      <Route exact path={routes.eth.erc20.new.finish} component={ETH_ERC20NewFinish} />
+
+      {/* Polkadot */}
+      <DOTRoutes />
+    </Switch>
   </Router>
 );
 

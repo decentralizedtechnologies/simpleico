@@ -1,8 +1,7 @@
-import { Box, Theme, Typography, WithStyles } from "@material-ui/core";
+import { Box, Theme, WithStyles } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
 import React from "react";
 import { RouteComponentProps } from "react-router-dom";
-import routes from "../../../routes";
 import { styles } from "../../../theme";
 
 export const drawerWidth = 420;
@@ -19,21 +18,8 @@ export const SidebarNavigation = withStyles((theme: Theme) => ({
 
   return (
     <Box px={3}>
-      <Box width={140} mb={4}>
-        <img src="/svg/logo-binance-dex.svg" width="100%" height="auto" />
-      </Box>
-      <Box>
-        <Typography
-          variant="body2"
-          className={
-            isSelected(routes.bnb.token.tools.select)
-              ? `${classes.sidebarNavigationSelectedLink} ${classes.sidebarNavigationLink}`
-              : classes.sidebarNavigationLink
-          }
-        >
-          Select
-        </Typography>
-      </Box>
+      <Box width={140} mb={4}></Box>
+      <Box></Box>
     </Box>
   );
 });
