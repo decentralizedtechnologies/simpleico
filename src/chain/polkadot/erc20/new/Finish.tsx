@@ -23,17 +23,15 @@ import { ERC20ContractModel, PolkadotClient } from "../../model";
 interface Props extends WithStyles, RouteComponentProps<{ id: string }> {}
 
 const Component: React.FC<Props> = ({ classes, history, ...props }) => {
-  const [transactionHash] = React.useState(ls.get(NAMESPACE, "erc20.receipt.transactionHash", ""));
-
   const container = React.useContext(DependencyContext);
   const ERC20Contract = container.get<ERC20ContractModel>(ERC20ContractModel.type);
   const Client = container.get<PolkadotClient>(PolkadotClient.type);
 
-  // React.useEffect(() => {
-  //   setTimeout(() => {
-  //     ls.update(NAMESPACE, { erc20: "" });
-  //   }, 5000);
-  // }, []);
+  React.useEffect(() => {
+    setTimeout(() => {
+      ls.update(NAMESPACE, { erc20: "" });
+    }, 5000);
+  }, []);
 
   return (
     <Box display="flex">
@@ -49,23 +47,11 @@ const Component: React.FC<Props> = ({ classes, history, ...props }) => {
         <Box mb={4}>
           <Paper elevation={1}>
             <Box p={2}>
-              {Boolean(transactionHash) ? (
+              {Boolean(ERC20Contract.contract?.address.toHuman()) ? (
                 <>
                   <Typography variant="body2" gutterBottom>
                     Congratulations! You've successfully created an ERC20 token in the Polkadot
                     chain.
-                  </Typography>
-                  <Typography variant="body2" gutterBottom>
-                    Now what?
-                  </Typography>
-                  <Typography variant="body2">
-                    {/* <Link to={routes.polkadot.erc20.tools.select}>Explore the token tools</Link> */}
-                    {/* {" · "}
-                    <Link to={routes.root}>List your token in the DEX</Link>
-                    {" · "}
-                    <Link to={routes.root}>Share</Link>
-                    {" · "}
-                    <Link to={routes.root}>Donate</Link> */}
                   </Typography>
                 </>
               ) : (

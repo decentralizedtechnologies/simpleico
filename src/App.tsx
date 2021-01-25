@@ -24,7 +24,7 @@ import { routes } from "./routes";
 const App: React.FC = () => (
   <Router>
     <Switch>
-      <Route path={routes.root} exact strict component={Home} />
+      <Route path={routes.root} exact strict sensitive component={Home} />
 
       {/* Binance Chain */}
       <Route exact path={routes.bnb.token.new.params} component={BNBTokenNewParams} />
